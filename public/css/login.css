@@ -1,0 +1,141 @@
+.pustaka-login {
+    --ink: #202839;
+    --muted: #68728a;
+    --line: #e3e6f2;
+    --paper: #f4f5fc;
+    --accent: #5b5bdf;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 100vh;
+    min-height: 100svh;
+    background: #fff;
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+}
+.pustaka-login *, .pustaka-login *::before, .pustaka-login *::after { box-sizing: border-box; }
+.pustaka-login a { color: inherit; }
+.pustaka-login button, .pustaka-login input { font: inherit; }
+.pustaka-login svg { display: block; flex-shrink: 0; }
+.pustaka-login :focus-visible { outline: 3px solid #8383e9; outline-offset: 4px; }
+.pustaka-login .login-story {
+    display: flex;
+    flex-direction: column;
+    padding: 48px clamp(32px, 5vw, 88px) 32px;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    color: #fff;
+    background: radial-gradient(ellipse at 60% -20%, #315b7b, transparent 65%), linear-gradient(145deg, #1c315b, #171b49 55%, #20123e);
+    border-right: 1px solid #263361;
+}
+.pustaka-login .login-wordmark {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    align-self: flex-start;
+    font-size: 21px;
+    font-weight: 650;
+    letter-spacing: -.8px;
+    text-decoration: none;
+}
+.pustaka-login .login-story-content { width: 100%; max-width: 410px; margin: auto 0; padding: 72px 0; }
+.pustaka-login .login-eyebrow {
+    margin: 0 0 15px;
+    color: var(--muted);
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1.15px;
+    line-height: 1.6;
+    text-transform: uppercase;
+}
+.pustaka-login .login-story-title, .pustaka-login .login-title {
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: 400;
+    letter-spacing: -1.5px;
+}
+.pustaka-login .login-story-title { margin: 0 0 24px; font-size: clamp(38px, 3.8vw, 58px); line-height: 1.12; }
+.pustaka-login .login-story-description { max-width: 350px; margin: 0; color: var(--muted); line-height: 1.9; }
+.pustaka-login .login-reading-card {
+    max-width: 350px;
+    margin-top: 36px;
+    padding: 24px;
+    border: 1px solid #ffffff26;
+    border-radius: 12px;
+    background: #ffffff09;
+    box-shadow: 0 12px 30px #0c103820;
+}
+.pustaka-login .login-reading-card .login-eyebrow { font-size: 9px; margin-bottom: 13px; }
+.pustaka-login .login-reading-card h3 { margin: 0 0 10px; font-size: 23px; line-height: 1.3; letter-spacing: -.65px; font-weight: 600; }
+.pustaka-login .login-reading-card p:not(.login-eyebrow) { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.7; }
+.pustaka-login .login-reading-steps { display: flex; align-items: center; gap: 12px; margin-top: 23px; padding-top: 18px; border-top: 1px solid #ffffff20; color: #b7e7da; font-size: 10px; }
+.pustaka-login .login-reading-steps .step-line { height: 1px; flex: 1; background: #b7e7da66; }
+.pustaka-login .login-story-footer { margin: 0; color: var(--muted); font-size: 11px; }
+.pustaka-login .login-story::before, .pustaka-login .login-story::after { content: ""; position: absolute; z-index: -1; border-radius: 50%; pointer-events: none; }
+.pustaka-login .login-story::before { width: 360px; height: 360px; right: -200px; top: 18%; background: linear-gradient(140deg, #a9e4d327, #7973e60a); }
+.pustaka-login .login-story::after { width: 420px; height: 420px; bottom: -300px; left: -130px; background: #7770de22; border: 1px solid #ffffff08; }
+.pustaka-login .login-wordmark > svg { width: 36px; height: 36px; padding: 6px; border-radius: 10px; background: #6865dd; }
+.pustaka-login .login-school { margin: 14px 0 0 46px; color: #c4cfe9; font-size: 9px; font-weight: 550; letter-spacing: 1.6px; }
+.pustaka-login .login-story .login-eyebrow { color: #b7e7da; }
+.pustaka-login .login-story-title em { color: #b7e7da; }
+.pustaka-login .login-story-description, .pustaka-login .login-reading-card p:not(.login-eyebrow) { color: #c4cfe7; }
+.pustaka-login .login-story-footer { color: #b1bdd9; }
+.pustaka-login .login-form-panel { background: radial-gradient(ellipse at 100% 0, #f0f1ff 0, transparent 55%), #fff; }
+.pustaka-login .login-form-wrap > .login-eyebrow { color: #5a5aaa; }
+.pustaka-login .login-title { color: #17254d; }
+.pustaka-login .login-register-link { color: #4e4eb1; }
+.pustaka-login .login-form-panel { display: flex; align-items: center; justify-content: center; padding: 64px 40px; }
+.pustaka-login .login-form-wrap { width: 100%; max-width: 380px; }
+.pustaka-login .login-title { margin: 0 0 14px; font-size: 40px; line-height: 1.14; }
+.pustaka-login .login-intro { margin: 0 0 28px; color: var(--muted); font-size: 12px; line-height: 1.8; }
+.pustaka-login .login-role-fieldset { min-width: 0; margin: 0 0 24px; padding: 0; border: 0; }
+.pustaka-login .login-role-fieldset legend { float: none; width: auto; margin: 0 0 9px; padding: 0; font-size: 12px; font-weight: 550; }
+.pustaka-login .login-role-options { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; padding: 4px; border: 1px solid var(--line); border-radius: 7px; background: var(--paper); }
+.pustaka-login .login-role { position: relative; margin: 0; cursor: pointer; }
+.pustaka-login .login-role input { position: absolute; width: 1px; height: 1px; margin: 0; opacity: 0; }
+.pustaka-login .login-role span { display: flex; align-items: center; justify-content: center; min-height: 36px; padding: 6px 8px; border: 1px solid transparent; border-radius: 4px; color: var(--muted); font-size: 12px; }
+.pustaka-login .login-role input:checked + span { background: var(--accent); color: #fff; border-color: var(--accent); box-shadow: 0 3px 8px #5b5bdf25; font-weight: 600; }
+.pustaka-login .login-role input:focus-visible + span { outline: 3px solid var(--accent); outline-offset: 2px; }
+.pustaka-login .login-field { margin-bottom: 18px; }
+.pustaka-login .login-field label { display: block; margin-bottom: 7px; font-size: 12px; font-weight: 550; }
+.pustaka-login .login-input { width: 100%; height: 44px; padding: 10px 12px; border: 1px solid #d9deec; border-radius: 5px; background: #fff; color: var(--ink); font-size: 13px; }
+.pustaka-login .login-input::placeholder { color: #7b8498; opacity: 1; }
+.pustaka-login .login-input:focus { border-color: var(--accent); outline: 2px solid #5b5bdf28; outline-offset: 1px; }
+.pustaka-login .login-password-wrap { position: relative; }
+.pustaka-login .login-password-wrap input { padding-right: 48px; }
+.pustaka-login .login-password-toggle { position: absolute; inset: 0 0 0 auto; display: grid; place-items: center; width: 44px; padding: 0; border: 0; border-radius: 4px; background: transparent; color: var(--muted); cursor: pointer; }
+.pustaka-login .login-password-toggle:hover { color: var(--ink); }
+.pustaka-login [hidden] { display: none !important; }
+.pustaka-login .login-submit { display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; min-height: 46px; margin-top: 22px; padding: 11px 18px; border: 1px solid var(--accent); border-radius: 5px; background: var(--accent); box-shadow: 0 5px 14px #5b5bdf20; color: #fff; font-size: 13px; font-weight: 550; cursor: pointer; }
+.pustaka-login .login-submit:hover { background: #4646c5; border-color: #4646c5; }
+.pustaka-login .login-register-card { margin-top: 26px; padding: 22px; border: 1px solid #e0e3f3; border-radius: 8px; background: linear-gradient(120deg, #f2f3ff, #f1f8f5); }
+.pustaka-login .login-register-tag { display: inline-block; margin-bottom: 12px; padding: 4px 8px; border-radius: 20px; background: #e5f3ec; color: #2c6c55; font-family: "SFMono-Regular", Consolas, monospace; font-size: 9px; letter-spacing: .3px; }
+.pustaka-login .login-register-card h2 { margin: 0 0 7px; font-size: 14px; font-weight: 600; }
+.pustaka-login .login-register-card p { margin: 0 0 15px; color: var(--muted); font-size: 12px; line-height: 1.7; }
+.pustaka-login .login-register-link { display: inline-flex; align-items: center; gap: 8px; min-height: 36px; padding: 7px 12px; border: 1px solid #d7d9ed; border-radius: 5px; background: #fff; font-size: 12px; font-weight: 550; text-decoration: none; }
+.pustaka-login .login-register-link:hover { border-color: #aaaade; background: #f2f2ff; }
+.pustaka-login .login-help { margin: 22px 0 0; color: var(--muted); font-size: 11px; line-height: 1.8; text-align: center; }
+.pustaka-login .login-notice { margin-bottom: 20px; padding: 13px 15px; border: 1px solid #d4e5da; border-radius: 6px; background: #f0f7f2; color: #28583c; font-size: 12px; line-height: 1.7; }
+.pustaka-login .login-notice-error { border-color: #edcfca; background: #fcf2f0; color: #883b2f; }
+.pustaka-login .login-notice ul { margin: 0; padding-left: 17px; }
+@media (min-width: 1500px) {
+    .pustaka-login .login-story { padding-left: max(80px, calc((100vw - 1260px) / 2)); }
+}
+@media (max-width: 900px) {
+    .pustaka-login .login-story { padding: 36px 32px 28px; }
+    .pustaka-login .login-form-panel { padding: 48px 32px; }
+    .pustaka-login .login-story-title { font-size: 41px; }
+    .pustaka-login .login-title { font-size: 36px; }
+}
+@media (max-width: 700px) {
+    .pustaka-login { grid-template-columns: 1fr; }
+    .pustaka-login .login-story { padding: 26px 24px; border-right: 0; border-bottom: 1px solid var(--line); }
+    .pustaka-login .login-wordmark { font-size: 20px; }
+    .pustaka-login .login-story-content, .pustaka-login .login-story-footer { display: none; }
+    .pustaka-login .login-form-panel { align-items: flex-start; padding: 38px 24px 36px; }
+    .pustaka-login .login-form-wrap { max-width: 420px; }
+    .pustaka-login .login-title { font-size: 38px; }
+    .pustaka-login .login-input { font-size: 16px; }
+}
