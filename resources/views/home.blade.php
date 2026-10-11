@@ -6,14 +6,17 @@
     <meta name="theme-color" content="#121c4a">
     <meta name="description" content="Ruang Pustaka, perpustakaan sekolah untuk menemukan buku, menjelajahi pengetahuan, dan memulai cerita baru.">
     <title>Ruang Pustaka | {{ config('library.school_name') }}</title>
-    <link rel="stylesheet" href="{{ asset('css/home.css') }}">
+    <link rel="icon" type="image/png" href="{{ asset('images/brand/favicon.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('images/brand/perpustakaan-smpn26-web.png') }}">
+    <link rel="stylesheet" href="{{ asset('css/home.css') }}?v={{ filemtime(public_path('css/home.css')) }}">
+    <link rel="stylesheet" href="{{ asset('css/brand.css') }}?v={{ filemtime(public_path('css/brand.css')) }}">
     <script src="{{ asset('js/home.js') }}" defer></script>
 </head>
 <body class="landing">
 <a class="home-skip" href="#main-content">Lewati ke isi halaman</a>
 <header class="home-header">
     <nav class="home-nav home-container" aria-label="Navigasi utama">
-        <a href="{{ route('home') }}" class="home-brand"><span class="brand-symbol"><x-icon name="book" :size="22"/></span>Ruang Pustaka<span class="brand-dot">.</span></a>
+        <a href="{{ route('home') }}" class="home-brand"><x-library-logo/>Ruang Pustaka<span class="brand-dot">.</span></a>
         <div class="home-nav-links"><a href="#koleksi">Koleksi buku</a><a href="#cara-meminjam">Cara meminjam</a></div>
         <div class="home-nav-actions">
             @auth
@@ -27,10 +30,8 @@
 </header>
 <main id="main-content">
     <section class="home-hero" aria-labelledby="hero-heading">
-        <div class="hero-orb hero-orb-one" aria-hidden="true"></div><div class="hero-orb hero-orb-two" aria-hidden="true"></div>
+        <img class="hero-school-photo" src="{{ asset('images/school/smpn-26-tangerang-home.jpg') }}" alt="" aria-hidden="true" width="1672" height="941" fetchpriority="high">
         <div class="hero-stars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-        <div class="hero-art hero-art-left" aria-hidden="true">@include('home.illustrations', ['side' => 'left'])</div>
-        <div class="hero-art hero-art-right" aria-hidden="true">@include('home.illustrations', ['side' => 'right'])</div>
         <div class="hero-content">
             <span class="hero-eyebrow"><span aria-hidden="true"></span> SELAMAT DATANG DI RUANG PUSTAKA</span>
             <p class="hero-school">{{ config('library.school_name') }}</p>
@@ -128,6 +129,6 @@
     </section>
     <section class="home-cta home-container" aria-labelledby="cta-heading"><div><p class="section-eyebrow">HALAMAN BARU MENANTIMU</p><h2 id="cta-heading">Sudah tahu ingin baca apa?</h2><p>Mulai perjalanan membacamu bersama Ruang Pustaka.</p></div><a class="home-button home-button-primary" href="{{ auth()->check() ? route('dashboard') : route('register') }}">{{ auth()->check() ? 'Buka dashboard' : 'Daftar sekarang' }} <x-icon name="arrow"/></a></section>
 </main>
-<footer class="home-footer home-container"><a href="{{ route('home') }}" class="home-brand"><x-icon name="book" :size="22"/>Ruang Pustaka.</a><p>Satu ruang untuk membuka banyak wawasan.</p><a href="#main-content">Kembali ke atas ↑</a></footer>
+<footer class="home-footer home-container"><a href="{{ route('home') }}" class="home-brand"><x-library-logo/>Ruang Pustaka.</a><p>Satu ruang untuk membuka banyak wawasan.</p><a href="#main-content">Kembali ke atas ↑</a></footer>
 </body>
 </html>

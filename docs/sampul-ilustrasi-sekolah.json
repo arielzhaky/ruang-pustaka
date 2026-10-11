@@ -1,0 +1,884 @@
+[
+  {
+    "id": 333,
+    "code": "F24-121",
+    "title": "NAKAYOSHI",
+    "author": "SHYBIR BAKALAN",
+    "theme": "comic",
+    "cover_path": "covers/illustrated/book-333-43b0be71fcdc.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 334,
+    "code": "NF25-001",
+    "title": "MANDIRI DAN DISIPLIN",
+    "author": "CHELVIA CH. MEIZAR",
+    "theme": "book",
+    "cover_path": "covers/illustrated/book-334-f107c20a9164.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 335,
+    "code": "F24-114",
+    "title": "Gala dan Riri",
+    "author": "Tamara Biliski",
+    "theme": "book",
+    "cover_path": "covers/illustrated/book-335-7f2755e2d640.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 339,
+    "code": "F24-119",
+    "title": "Kat Martin",
+    "author": "Reeses Bride",
+    "theme": "book",
+    "cover_path": "covers/illustrated/book-339-6fc03cd5f44f.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 342,
+    "code": "F24-091",
+    "title": "Dongeng - Dongeneg religius",
+    "author": "Isnaini",
+    "theme": "arch",
+    "cover_path": "covers/illustrated/book-342-bf186e32897e.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 344,
+    "code": "F24-092",
+    "title": "Nabi dan Rasul",
+    "author": "Ust.Hanafi",
+    "theme": "arch",
+    "cover_path": "covers/illustrated/book-344-dddfadc1a1d9.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 362,
+    "code": "F24-098",
+    "title": "Piye kabare? Enak Jamaku to!",
+    "author": "Belinda",
+    "theme": "book",
+    "cover_path": "covers/illustrated/book-362-7fba25f4cf53.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 365,
+    "code": "F24-019",
+    "title": "Kisah Danau Toba",
+    "author": "Filyan Al hazza",
+    "theme": "landscape",
+    "cover_path": "covers/illustrated/book-365-497169c14a67.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 373,
+    "code": "F24-064",
+    "title": "Dongeng Sopan Santun",
+    "author": "Bagus Setiadi",
+    "theme": "forest",
+    "cover_path": "covers/illustrated/book-373-32a2aaab6f10.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 375,
+    "code": "F24-087",
+    "title": "Aku Cinta islam",
+    "author": "A.Rofig S.Ag",
+    "theme": "arch",
+    "cover_path": "covers/illustrated/book-375-b31b3eda2ea0.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 376,
+    "code": "F24-063",
+    "title": "Majapahit Gajah ada",
+    "author": "Adinesia",
+    "theme": "heritage",
+    "cover_path": "covers/illustrated/book-376-87ce66cc4301.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 379,
+    "code": "F24-036",
+    "title": "Akibat Suka Berprasangka Buruk",
+    "author": "Imam Kr Moncol",
+    "theme": "book",
+    "cover_path": "covers/illustrated/book-379-09ca5b0f5972.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 380,
+    "code": "F24-030",
+    "title": "NaBI Zulkifli",
+    "author": "Ibnu Muhidin",
+    "theme": "arch",
+    "cover_path": "covers/illustrated/book-380-89c429d9f5d0.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 385,
+    "code": "F24-045",
+    "title": "Neera",
+    "author": "Shendi Ane Rimardani",
+    "theme": "book",
+    "cover_path": "covers/illustrated/book-385-d6e9ce76bcab.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 391,
+    "code": "F24-069",
+    "title": "lolosdari Ancaman Harimau",
+    "author": "Mb. Rahimsyah",
+    "theme": "forest",
+    "cover_path": "covers/illustrated/book-391-d0a08670171b.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 393,
+    "code": "F24-022",
+    "title": "Paus dan Nabi Yusuf",
+    "author": "Erlina Zachi",
+    "theme": "arch",
+    "cover_path": "covers/illustrated/book-393-378b54eeeed9.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 394,
+    "code": "F24-076",
+    "title": "Grammar and Conversation",
+    "author": "Mb. Rahimsyah",
+    "theme": "language",
+    "cover_path": "covers/illustrated/book-394-288d88f99ee0.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 396,
+    "code": "F24-013",
+    "title": "Mitologi Yunani",
+    "author": "Wahyu Untara",
+    "theme": "book",
+    "cover_path": "covers/illustrated/book-396-859ee3f1d548.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 397,
+    "code": "F24-071",
+    "title": "Kura - Kura Pemarah",
+    "author": "Mb. Rahimsyah",
+    "theme": "forest",
+    "cover_path": "covers/illustrated/book-397-ca18e91c3d55.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 398,
+    "code": "F24-035",
+    "title": "JayaPrana",
+    "author": "Imam Kr Moncol",
+    "theme": "heritage",
+    "cover_path": "covers/illustrated/book-398-642b0df64526.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 399,
+    "code": "F24-016",
+    "title": "Kisah Pahlawan Surga",
+    "author": "Wachied -Al Jufri",
+    "theme": "arch",
+    "cover_path": "covers/illustrated/book-399-e3b264892998.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 400,
+    "code": "F24-068",
+    "title": "Lubang Perlindungan",
+    "author": "Mb. Rahimsyah",
+    "theme": "book",
+    "cover_path": "covers/illustrated/book-400-a8287408ffb8.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 402,
+    "code": "F24-020",
+    "title": "Cerita Rakyat Nusantara",
+    "author": "Putri Novia",
+    "theme": "book",
+    "cover_path": "covers/illustrated/book-402-2c24f98ae6f6.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 404,
+    "code": "F24-072",
+    "title": "Putri Duyung",
+    "author": "Mb. Rahimsyah",
+    "theme": "book",
+    "cover_path": "covers/illustrated/book-404-80f98d755652.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 405,
+    "code": "F24-038",
+    "title": "Kisah Belalang Yang Malas",
+    "author": "Winda Widianti",
+    "theme": "forest",
+    "cover_path": "covers/illustrated/book-405-f07fea7112bd.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 409,
+    "code": "F24-077",
+    "title": "Si Bujang Katak",
+    "author": "Belum diketahui",
+    "theme": "forest",
+    "cover_path": "covers/illustrated/book-409-db1665f74d02.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 411,
+    "code": "F24-065",
+    "title": "Jaka Tarub",
+    "author": "Tira Ikranegara",
+    "theme": "heritage",
+    "cover_path": "covers/illustrated/book-411-9fc86dc29808.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 417,
+    "code": "F24-042",
+    "title": "Rusa Angin Dan Rumput Madu",
+    "author": "Seri Jataka",
+    "theme": "moon",
+    "cover_path": "covers/illustrated/book-417-45eaf3673a03.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 418,
+    "code": "F24-021",
+    "title": "Biri - Biri yang cerdik",
+    "author": "Leni Aryani",
+    "theme": "forest",
+    "cover_path": "covers/illustrated/book-418-58195994a38a.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 419,
+    "code": "F24-070",
+    "title": "Burung Elang",
+    "author": "Mb. Rahimsyah",
+    "theme": "bird",
+    "cover_path": "covers/illustrated/book-419-5e48f64a2b07.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 422,
+    "code": "F24-080",
+    "title": "Malin Kundang",
+    "author": "Tira Ikranegara",
+    "theme": "book",
+    "cover_path": "covers/illustrated/book-422-5a95929c152b.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 425,
+    "code": "F24-032",
+    "title": "Asal Mula Gunung Berapi",
+    "author": "Imam Kr Moncol",
+    "theme": "landscape",
+    "cover_path": "covers/illustrated/book-425-a6a01b0511fc.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 427,
+    "code": "F24-029",
+    "title": "Si Bebek yang Cantik",
+    "author": "Belum diketahui",
+    "theme": "bird",
+    "cover_path": "covers/illustrated/book-427-ea6f204e2ce7.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 431,
+    "code": "F24-010",
+    "title": "Kisah 25 Nabi dan Rosul",
+    "author": "Ust Hanafi",
+    "theme": "arch",
+    "cover_path": "covers/illustrated/book-431-cff91f3a2d22.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 434,
+    "code": "F24-004",
+    "title": "Legenda Roro Jonggrang",
+    "author": "MB Rahimyah",
+    "theme": "heritage",
+    "cover_path": "covers/illustrated/book-434-7001b8de263b.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 435,
+    "code": "F24-015",
+    "title": "Pahlawan indonesia",
+    "author": "Belum diketahui",
+    "theme": "civic",
+    "cover_path": "covers/illustrated/book-435-e45418396c53.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 436,
+    "code": "F24-023",
+    "title": "Bangau",
+    "author": "Belum diketahui",
+    "theme": "bird",
+    "cover_path": "covers/illustrated/book-436-f5a05c438c52.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 437,
+    "code": "F24-002",
+    "title": "Legenda Batu Menangis",
+    "author": "Belum diketahui",
+    "theme": "book",
+    "cover_path": "covers/illustrated/book-437-055211d25a42.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 448,
+    "code": "SUM-2024-131",
+    "title": "Kartini",
+    "author": "A. Kohar Ibrahim",
+    "theme": "civic",
+    "cover_path": "covers/illustrated/book-448-7e6a8d299ad2.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 449,
+    "code": "SUM-2024-132",
+    "title": "Guyon Wayang",
+    "author": "Helena J Kristina",
+    "theme": "heritage",
+    "cover_path": "covers/illustrated/book-449-80dc31fec995.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 450,
+    "code": "SUM-2024-133",
+    "title": "Ternyata Aku Bisa",
+    "author": "Charlotte Priatna",
+    "theme": "book",
+    "cover_path": "covers/illustrated/book-450-0d8be3d12b53.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 451,
+    "code": "SUM-2024-134",
+    "title": "Ghost Strories",
+    "author": "Belum diketahui",
+    "theme": "book",
+    "cover_path": "covers/illustrated/book-451-16796d5365cf.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 454,
+    "code": "SUM-2024-138",
+    "title": "Aku, dia dan Dia",
+    "author": "Sc Witchel",
+    "theme": "book",
+    "cover_path": "covers/illustrated/book-454-0e707631dfc0.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 460,
+    "code": "SUM-2024-145",
+    "title": "Jelajah bandung purba",
+    "author": "Dewi Syafriani",
+    "theme": "landscape",
+    "cover_path": "covers/illustrated/book-460-aeb32dccad5e.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 468,
+    "code": "SUM-2024-154",
+    "title": "wali Songo",
+    "author": "Aufa Izzuddien",
+    "theme": "arch",
+    "cover_path": "covers/illustrated/book-468-1e88200dc732.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 469,
+    "code": "SUM-2024-156",
+    "title": "Timun Emas dan Raksasa",
+    "author": "MB.Ibrahim",
+    "theme": "book",
+    "cover_path": "covers/illustrated/book-469-33526f7be1b8.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 474,
+    "code": "SUM-2024-162",
+    "title": "Teknik Berpidato",
+    "author": "William J. Mc. Culloght",
+    "theme": "science",
+    "cover_path": "covers/illustrated/book-474-116733ae5a75.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 477,
+    "code": "SUM-2024-165",
+    "title": "John Fitzgerald Kennedy",
+    "author": "Bijou",
+    "theme": "civic",
+    "cover_path": "covers/illustrated/book-477-62a925d3ca69.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 478,
+    "code": "SUM-2024-166",
+    "title": "Kumpulan Puisi dan Pantun & Pribahasa",
+    "author": "Drs. Budi Raharjo",
+    "theme": "book",
+    "cover_path": "covers/illustrated/book-478-a0e1296edbf1.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 480,
+    "code": "SUM-2024-168",
+    "title": "Competence for Success",
+    "author": "Febe Chen",
+    "theme": "book",
+    "cover_path": "covers/illustrated/book-480-e5e1b149f2c3.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 482,
+    "code": "SUM-2024-170",
+    "title": "Bunga Rampai Seputar Autisme",
+    "author": "Leny Marijani",
+    "theme": "book",
+    "cover_path": "covers/illustrated/book-482-6c331c0b02dc.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 483,
+    "code": "SUM-2024-171",
+    "title": "Sijuki dan Mang Aung",
+    "author": "Pionikon",
+    "theme": "comic",
+    "cover_path": "covers/illustrated/book-483-35b4d81b2925.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 484,
+    "code": "SUM-2024-172",
+    "title": "Pembuatan Video dengan Move Maker Plus Pembuatan DVD dan VCD",
+    "author": "Ali Akbsr, ST",
+    "theme": "film",
+    "cover_path": "covers/illustrated/book-484-b5c786215d85.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 485,
+    "code": "SUM-2024-173",
+    "title": "Keajaiban Rezeki",
+    "author": "Belum diketahui",
+    "theme": "book",
+    "cover_path": "covers/illustrated/book-485-3b0199fdd005.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 487,
+    "code": "SUM-2024-175",
+    "title": "Menangkal Kebangkitan PKI",
+    "author": "Alfian Tanjung",
+    "theme": "civic",
+    "cover_path": "covers/illustrated/book-487-bacb1551efbb.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 488,
+    "code": "SUM-2024-176",
+    "title": "Menggapai Malam Lailatul Qadar",
+    "author": "Ahmad Rivai Rivan",
+    "theme": "arch",
+    "cover_path": "covers/illustrated/book-488-8ef3010ddc6a.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 489,
+    "code": "SUM-2024-177",
+    "title": "Thank to",
+    "author": "Ria Ricis",
+    "theme": "book",
+    "cover_path": "covers/illustrated/book-489-1312610ed333.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 491,
+    "code": "SUM-2024-180",
+    "title": "Retorika Kaum Bijak",
+    "author": "PROF Dr. Azhar.Arsyad",
+    "theme": "language",
+    "cover_path": "covers/illustrated/book-491-da3ef735a29d.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 493,
+    "code": "SUM-2024-182",
+    "title": "Broken Heart",
+    "author": "Dita Safitri",
+    "theme": "book",
+    "cover_path": "covers/illustrated/book-493-9faef9e02d09.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 498,
+    "code": "SUM-2024-189",
+    "title": "Renungan dahsyat untuk Ortu",
+    "author": "Ihsan Baihaqi",
+    "theme": "book",
+    "cover_path": "covers/illustrated/book-498-fd1721a863c6.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 499,
+    "code": "SUM-2024-190",
+    "title": "Pendekar UKM",
+    "author": "Azmi ramadhan",
+    "theme": "book",
+    "cover_path": "covers/illustrated/book-499-3c748bb17cb6.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 506,
+    "code": "SUM-2024-198",
+    "title": "Mukjizat Kisah 25 Nabi",
+    "author": "Ahmad Fauzan",
+    "theme": "arch",
+    "cover_path": "covers/illustrated/book-506-96d45740f32e.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 507,
+    "code": "SUM-2024-200",
+    "title": "Kisah teladan 25 Nabi dan Rosul",
+    "author": "A. Budiansyah",
+    "theme": "arch",
+    "cover_path": "covers/illustrated/book-507-783d897cb3c3.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 508,
+    "code": "SUM-2024-201",
+    "title": "Wanita Teladan",
+    "author": "Mahfud Mahdi",
+    "theme": "book",
+    "cover_path": "covers/illustrated/book-508-a5c786666990.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 509,
+    "code": "SUM-2024-202",
+    "title": "Teknik Berbicara",
+    "author": "w George Jehan",
+    "theme": "science",
+    "cover_path": "covers/illustrated/book-509-e780fe53badb.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 511,
+    "code": "SUM-2024-206",
+    "title": "Kisah Teladan 25 Nabi dan rosul",
+    "author": "Cecep Ihsani",
+    "theme": "arch",
+    "cover_path": "covers/illustrated/book-511-aad8312244a9.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 513,
+    "code": "SUM-2024-208",
+    "title": "kamus Saku B.Indonesia",
+    "author": "Tim Bentang Pustaka",
+    "theme": "language",
+    "cover_path": "covers/illustrated/book-513-f4751aa48c15.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 514,
+    "code": "SUM-2024-209",
+    "title": "Nabi Isa AS",
+    "author": "Kinara Putri",
+    "theme": "arch",
+    "cover_path": "covers/illustrated/book-514-174d37e0f879.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 515,
+    "code": "SUM-2024-210",
+    "title": "Umar bin Khattab",
+    "author": "Anee Rahman",
+    "theme": "arch",
+    "cover_path": "covers/illustrated/book-515-3b29214f676e.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 516,
+    "code": "SUM-2024-211",
+    "title": "terjebak Hujan Deras",
+    "author": "Roi Visual",
+    "theme": "moon",
+    "cover_path": "covers/illustrated/book-516-8b93b4ab0a90.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 518,
+    "code": "SUM-2024-213",
+    "title": "Rise R to the second power",
+    "author": "Maki Hakoda",
+    "theme": "comic",
+    "cover_path": "covers/illustrated/book-518-c5d48c2ed92a.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 519,
+    "code": "SUM-2024-214",
+    "title": "Pintar memasak",
+    "author": "Hanna Santoso",
+    "theme": "kitchen",
+    "cover_path": "covers/illustrated/book-519-b70c9d9934a0.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 520,
+    "code": "SUM-2024-215",
+    "title": "Crayon Shinchan",
+    "author": "Yushito Usui",
+    "theme": "comic",
+    "cover_path": "covers/illustrated/book-520-df646bbe870c.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 521,
+    "code": "SUM-2024-216",
+    "title": "Science Color",
+    "author": "Jeon Jae un",
+    "theme": "science",
+    "cover_path": "covers/illustrated/book-521-68a2b7eed6cd.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 523,
+    "code": "SUM-2024-218",
+    "title": "UUD 45",
+    "author": "Kabinet kerja 2014-2019",
+    "theme": "civic",
+    "cover_path": "covers/illustrated/book-523-1b4eb8efd5a8.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 524,
+    "code": "SUM-2024-219",
+    "title": "Angel Hunt",
+    "author": "Obayashi Miyuki",
+    "theme": "comic",
+    "cover_path": "covers/illustrated/book-524-7b401f376475.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 525,
+    "code": "SUM-2024-220",
+    "title": "Angel Heart",
+    "author": "Tsukasa Hojo",
+    "theme": "comic",
+    "cover_path": "covers/illustrated/book-525-2a4c2052b97e.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 526,
+    "code": "SUM-2024-222",
+    "title": "Buku Pintar MaxiGrow",
+    "author": "Litbang Tani Solusi",
+    "theme": "landscape",
+    "cover_path": "covers/illustrated/book-526-a05f79f1f76a.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 527,
+    "code": "SUM-2024-223",
+    "title": "Kamus Bahasa Indonesia",
+    "author": "Hoetomo, MA",
+    "theme": "language",
+    "cover_path": "covers/illustrated/book-527-60511d3ad85b.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 528,
+    "code": "SUM-2024-224",
+    "title": "Feeling of Dream",
+    "author": "Mazumi Yuuki",
+    "theme": "moon",
+    "cover_path": "covers/illustrated/book-528-d4d380cc9cca.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 529,
+    "code": "SUM-2024-225",
+    "title": "Miiko",
+    "author": "Ono Eriko",
+    "theme": "comic",
+    "cover_path": "covers/illustrated/book-529-50a9e08d058f.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 531,
+    "code": "SUM-2024-227",
+    "title": "Cool n Smart Magazine",
+    "author": "Pusat penerbitan LIA",
+    "theme": "book",
+    "cover_path": "covers/illustrated/book-531-46fbe1843003.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 532,
+    "code": "SUM-2024-230",
+    "title": "Belajar Fisika",
+    "author": "Kim Soo Kyoung",
+    "theme": "science",
+    "cover_path": "covers/illustrated/book-532-8bda3cf1ad03.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 534,
+    "code": "SUM-2024-232",
+    "title": "Majalah Kisah Islam",
+    "author": "KH A Hasyim Muzadi",
+    "theme": "arch",
+    "cover_path": "covers/illustrated/book-534-56f4094f995e.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 535,
+    "code": "SUM-2024-233",
+    "title": "Pembemaran Tanah dan Air",
+    "author": "Arinto Nugroho",
+    "theme": "landscape",
+    "cover_path": "covers/illustrated/book-535-dee5644a94e4.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 536,
+    "code": "SUM-2024-234",
+    "title": "Kamus 3 Bahasa",
+    "author": "MB Rahimsyah, AR",
+    "theme": "language",
+    "cover_path": "covers/illustrated/book-536-290c157932eb.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 537,
+    "code": "SUM-2024-235",
+    "title": "Komik Cerita Rakyat Indonesia",
+    "author": "Dian K & tethy Ezokanzo",
+    "theme": "comic",
+    "cover_path": "covers/illustrated/book-537-c1f3a22ae8c5.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 538,
+    "code": "SUM-2024-237",
+    "title": "Kumpulan Komik Pembelajaran",
+    "author": "Lany Anggraini",
+    "theme": "comic",
+    "cover_path": "covers/illustrated/book-538-588e702d6fcc.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 539,
+    "code": "SUM-2024-238",
+    "title": "296 Bandara Gerbang Indonesia",
+    "author": "Toto TIS Suparto",
+    "theme": "science",
+    "cover_path": "covers/illustrated/book-539-5229a27ce0ff.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 540,
+    "code": "SUM-2024-240",
+    "title": "Si Kancil",
+    "author": "Sundoro",
+    "theme": "forest",
+    "cover_path": "covers/illustrated/book-540-813a24d1dbce.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 542,
+    "code": "SUM-2024-251",
+    "title": "Nyi Roro Kidul",
+    "author": "Yudhistira Ikranegara",
+    "theme": "heritage",
+    "cover_path": "covers/illustrated/book-542-ab96e5532ea7.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 543,
+    "code": "SUM-2024-252",
+    "title": "Nyi Roro Kidul",
+    "author": "MB Rahimsyah",
+    "theme": "heritage",
+    "cover_path": "covers/illustrated/book-543-a74f0601a35d.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 544,
+    "code": "SUM-2024-253",
+    "title": "UUD 45",
+    "author": "SEKJEN MPR RI",
+    "theme": "civic",
+    "cover_path": "covers/illustrated/book-544-242f0025abc8.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 545,
+    "code": "SUM-2024-254",
+    "title": "Ketetapan MPR RI",
+    "author": "SEKJEN MPR RI",
+    "theme": "civic",
+    "cover_path": "covers/illustrated/book-545-116282fe4ce5.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 546,
+    "code": "SUM-2024-258",
+    "title": "I am a Wonder Kid",
+    "author": "Preeta Vyas",
+    "theme": "book",
+    "cover_path": "covers/illustrated/book-546-c82080e4718a.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 547,
+    "code": "SUM-2024-259",
+    "title": "Muslihat Rahwana",
+    "author": "Dimas Ragilputra",
+    "theme": "heritage",
+    "cover_path": "covers/illustrated/book-547-d08922608192.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 549,
+    "code": "SUM-2024-261",
+    "title": "Angin dan Bulan",
+    "author": "Esther Tien",
+    "theme": "moon",
+    "cover_path": "covers/illustrated/book-549-c1829e976040.jpg",
+    "kind": "original-illustration"
+  },
+  {
+    "id": 550,
+    "code": "SUM-2024-262",
+    "title": "Landak yang Jorok",
+    "author": "Imam Kr Moncol",
+    "theme": "hedgehog",
+    "cover_path": "covers/illustrated/book-550-6388be03dd45.jpg",
+    "kind": "original-illustration"
+  }
+]

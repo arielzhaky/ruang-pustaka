@@ -1,0 +1,11 @@
+.library-logo { display: inline-block; width: 56px; height: 56px; object-fit: contain; flex-shrink: 0; vertical-align: middle; }
+.home-brand > .library-logo { width: 56px; height: 56px; margin-right: 2px; }
+.workspace-brand > .library-logo { width: 44px; height: 44px; }
+.pustaka-login .login-wordmark > .library-logo { width: 76px; height: 76px; }
+.registration-brand { display: inline-flex; align-items: center; gap: 12px; }
+.registration-brand > .library-logo { width: 60px; height: 60px; }
+.home-footer .library-logo { width: 44px; height: 44px; }
+@media (max-width: 600px) {
+    .home-brand > .library-logo { width: 42px; height: 42px; }
+    .pustaka-login .login-wordmark > .library-logo { width: 60px; height: 60px; }
+}

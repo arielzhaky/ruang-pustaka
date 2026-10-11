@@ -178,8 +178,8 @@ class UserDataFeaturesTest extends TestCase
     public function test_templates_have_expected_columns_and_wrong_headers_are_rejected(): void
     {
         $this->actingAs($this->staff);
-        $this->assertStringContainsString(implode(',', self::MEMBERS), $this->get('/members/template')->assertOk()->streamedContent());
-        $this->assertStringContainsString(implode(',', self::BOOKS), $this->get('/books/template')->assertOk()->streamedContent());
+        $this->assertStringContainsString(implode(',', \App\Support\SchoolCsvImport::MEMBER_HEADERS), $this->get('/members/template')->assertOk()->streamedContent());
+        $this->assertStringContainsString(implode(',', \App\Support\SchoolCsvImport::BOOK_HEADERS), $this->get('/books/template')->assertOk()->streamedContent());
         $this->post('/members/import', ['file' => $this->csv(['wrong'], [['data']])])->assertSessionHasErrors('file');
         $this->post('/books/import', ['file' => $this->csv(self::BOOKS, [])])->assertSessionHasErrors('file');
     }

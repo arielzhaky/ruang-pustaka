@@ -52,8 +52,21 @@
                                 @endif
                                 @php($renewal = $renewals->get($loan->item_id))
                                 @if($renewal && $renewal->status !== 'rejected')<p class="small mt-2">{{ $renewal->status === 'pending' ? 'Perpanjangan menunggu persetujuan' : 'Sudah diperpanjang' }}</p>@endif
+                                @if($renewal && $renewal->status === 'rejected')
+                                    <p class="small mt-2 mb-1"><strong>Perpanjangan ditolak</strong></p>
+                                    <p class="small text-secondary">{{ $renewal->decision_note }}</p>
+                                @endif
                                 @if((! $renewal || $renewal->status === 'rejected') && ! $loan->returned_at && ! \Carbon\Carbon::parse($loan->due_date)->isBefore(today()))
-                                    <form method="POST" action="{{ route('renewals.store', $loan->item_id) }}" class="mt-2">@csrf<button class="btn btn-sm btn-outline-primary">Ajukan perpanjangan</button></form>
+                                    <details class="mt-2">
+                                        <summary>Ajukan perpanjangan</summary>
+                                        <form method="POST" action="{{ route('renewals.store', $loan->item_id) }}" class="mt-2">
+                                            @csrf
+                                            <label for="renewal-reason-{{ $loan->item_id }}" class="form-label">Alasan perpanjangan (opsional)</label>
+                                            <textarea id="renewal-reason-{{ $loan->item_id }}" name="reason" class="form-control" maxlength="500" rows="2" placeholder="Contoh: belum selesai membaca"></textarea>
+                                            <p class="form-text">Batas kembali tetap {{ \Carbon\Carbon::parse($loan->due_date)->format('d/m/Y') }} sampai petugas menyetujui.</p>
+                                            <button class="btn btn-sm btn-outline-primary">Kirim pengajuan</button>
+                                        </form>
+                                    </details>
                                 @endif
                             </td>
                             <td>@include('shared.loan-charge', ['chargeItem' => $loan])</td>

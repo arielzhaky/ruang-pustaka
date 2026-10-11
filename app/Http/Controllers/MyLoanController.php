@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LoanRenewal;
 use Illuminate\Support\Facades\DB;
 
 class MyLoanController extends Controller
@@ -29,7 +30,7 @@ class MyLoanController extends Controller
             ->orderByDesc('l.borrowed_at')
             ->paginate(10);
 
-        $renewals = \App\Models\LoanRenewal::whereIn('loan_item_id', $loans->pluck('item_id'))->get()->keyBy('loan_item_id');
+        $renewals = LoanRenewal::whereIn('loan_item_id', $loans->pluck('item_id'))->get()->keyBy('loan_item_id');
 
         return view('my-loans.index', compact('loans', 'renewals'));
     }

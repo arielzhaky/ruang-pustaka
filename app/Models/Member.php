@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Member extends Model
 {
+    protected $hidden = ['login_qr_token', 'login_qr_hash'];
+
     protected $fillable = [
         'user_id',
         'member_code',
@@ -16,11 +18,12 @@ class Member extends Model
         'phone',
         'gender',
         'age',
+        'senayan_data',
     ];
 
     protected function casts(): array
     {
-        return ['age' => 'integer'];
+        return ['senayan_data' => 'array', 'age' => 'integer', 'login_qr_token' => 'encrypted'];
     }
 
     public function user(): BelongsTo

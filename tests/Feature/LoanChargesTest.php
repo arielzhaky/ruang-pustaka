@@ -134,8 +134,8 @@ class LoanChargesTest extends TestCase
         $this->post('/books/import', ['file' => UploadedFile::fake()->createWithContent('buku.csv', $csv)])->assertSessionHasNoErrors();
         $this->assertDatabaseHas('books', ['title' => 'Buku Impor', 'replacement_price' => 42000]);
         $export = $this->get('/books/export')->assertOk()->streamedContent();
-        $this->assertStringContainsString('harga_buku', $export);
-        $this->assertStringContainsString('42000', $export);
-        $this->assertStringContainsString('65000', $export);
+        $this->assertStringContainsString(implode(',', \App\Support\SchoolCsvImport::BOOK_HEADERS), $export);
+        $this->assertStringContainsString('Buku Impor', $export);
+        $this->assertSame(42000, Book::where('title', 'Buku Impor')->first()->replacement_price);
     }
 }

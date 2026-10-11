@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\BookReservation;
+use App\Models\SchoolClass;
 use App\Services\ReservationQueue;
 use App\Support\LoanCharges;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -14,12 +16,34 @@ class LoanController extends Controller
 {
     public function create(Request $request)
     {
-        $filters = $request->validate(['q' => ['nullable', 'string', 'max:100'], 'member_id' => ['nullable', 'integer']]);
+        $filters = $request->validate([
+            'q' => ['nullable', 'string', 'max:100'],
+            'member_id' => ['nullable', 'integer'],
+            'reservation_id' => ['nullable', 'integer', 'min:1'],
+        ]);
+        $selectedReservation = null;
+        if (! empty($filters['reservation_id'])) {
+            $selectedReservation = BookReservation::with(['member.user', 'bookCopy.book'])
+                ->whereKey($filters['reservation_id'])->where('status', 'ready')
+                ->where('expires_at', '>', now())
+                ->whereHas('member.user', fn ($q) => $q->where('role', 'anggota')->where('is_active', true))
+                ->whereHas('bookCopy', fn ($q) => $q->where('import_unavailable', false)->whereNull('archived_at')->where('condition', 'baik')
+                    ->whereDoesntHave('loanItems', fn ($items) => $items->whereNull('returned_at'))
+                    ->whereHas('book', fn ($books) => $books->whereNull('archived_at')))
+                ->first();
+            if (! $selectedReservation) {
+                return redirect()->route('reservations.index')->withErrors([
+                    'reservation' => 'Reservasi ini sudah tidak siap diambil. Periksa kembali status dan batas pengambilannya.',
+                ]);
+            }
+        }
+        $selectedMemberId = $selectedReservation?->member_id ?? ($filters['member_id'] ?? null);
+        $selectedCopyIds = $selectedReservation ? [$selectedReservation->book_copy_id] : [];
         $members = DB::table('members as m')
             ->join('users as u', 'u.id', '=', 'm.user_id')
             ->where('u.role', 'anggota')
             ->where('u.is_active', 1)
-            ->when($filters['q'] ?? null, fn ($q, $search) => $q->where(fn ($q) => $q->where('u.name', 'like', "%{$search}%")->orWhere('m.nis', 'like', "%{$search}%")->orWhere('m.member_code', 'like', "%{$search}%")))
+            ->when(! $selectedReservation ? ($filters['q'] ?? null) : null, fn ($q, $search) => $q->where(fn ($q) => $q->where('u.name', 'like', "%{$search}%")->orWhere('m.nis', 'like', "%{$search}%")->orWhere('m.member_code', 'like', "%{$search}%")))
             ->select('m.id', 'm.member_code', 'm.nis', 'u.name')
             ->orderBy('u.name')
             ->get();
@@ -28,7 +52,7 @@ class LoanController extends Controller
             ->join('books as b', 'b.id', '=', 'bc.book_id')
             ->whereNull('b.archived_at')
             ->whereNull('bc.archived_at')
-            ->where('bc.condition', 'baik')
+            ->where('bc.condition', 'baik')->where('bc.import_unavailable', false)
             ->whereNotExists(function ($query) {
                 $query->selectRaw('1')
                     ->from('loan_items as li')
@@ -44,7 +68,7 @@ class LoanController extends Controller
         $loanDays = config('library.loan_days');
         $defaultDueDate = today()->addDays($loanDays)->toDateString();
 
-        return view('loans.create', compact('heldCopies', 'members', 'copies', 'maxActiveLoans', 'loanDays', 'defaultDueDate'));
+        return view('loans.create', compact('selectedReservation', 'selectedMemberId', 'selectedCopyIds', 'heldCopies', 'members', 'copies', 'maxActiveLoans', 'loanDays', 'defaultDueDate'));
     }
 
     public function store(Request $request)
@@ -121,7 +145,7 @@ class LoanController extends Controller
 
             foreach ($copies as $copy) {
                 $book = $books->get($copy->book_id);
-                if ($copy->archived_at !== null || $copy->condition !== 'baik' || ! $book || $book->archived_at !== null) {
+                if ($copy->import_unavailable || $copy->archived_at !== null || $copy->condition !== 'baik' || ! $book || $book->archived_at !== null) {
                     throw ValidationException::withMessages([
                         'book_copy_ids' => "Eksemplar {$copy->inventory_code} tidak tersedia untuk dipinjam.",
                     ]);
@@ -166,14 +190,55 @@ class LoanController extends Controller
             ->with('success', 'Peminjaman '.count($data['book_copy_ids']).' eksemplar berhasil dicatat.');
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        $filters = $request->validate([
+            'q' => ['nullable', 'string', 'max:100'],
+            'class_id' => ['nullable', 'integer', 'exists:school_classes,id'],
+            'status' => ['nullable', 'in:active,late,returned,lost'],
+            'start_date' => ['nullable', 'date_format:Y-m-d'],
+            'end_date' => ['nullable', 'date_format:Y-m-d', ...(is_string($request->input('start_date')) && $request->filled('start_date') ? ['after_or_equal:start_date'] : [])],
+            'page' => ['nullable', 'integer', 'min:1'],
+        ], [
+            'q.string' => 'Kata pencarian harus berupa teks.',
+            'q.max' => 'Kata pencarian maksimal 100 karakter.',
+            'class_id.integer' => 'Kelas tidak valid.',
+            'class_id.exists' => 'Kelas tidak ditemukan.',
+            'status.in' => 'Status peminjaman tidak valid.',
+            'start_date.date_format' => 'Tanggal awal tidak valid.',
+            'end_date.date_format' => 'Tanggal akhir tidak valid.',
+            'end_date.after_or_equal' => 'Tanggal akhir harus sama dengan atau setelah tanggal awal.',
+            'page.integer' => 'Nomor halaman tidak valid.',
+            'page.min' => 'Nomor halaman minimal 1.',
+        ]);
+        $filters['q'] = trim($filters['q'] ?? '');
         $loans = DB::table('loan_items as li')
             ->join('loans as l', 'l.id', '=', 'li.loan_id')
             ->join('members as m', 'm.id', '=', 'l.member_id')
             ->join('users as u', 'u.id', '=', 'm.user_id')
             ->join('book_copies as bc', 'bc.id', '=', 'li.book_copy_id')
             ->join('books as b', 'b.id', '=', 'bc.book_id')
+            ->leftJoin('school_classes as sc', 'sc.id', '=', 'm.school_class_id')
+            ->when($filters['q'] !== '', function ($query) use ($filters) {
+                $search = '%'.$filters['q'].'%';
+                $query->where(fn ($query) => $query->where('u.name', 'like', $search)
+                    ->orWhere('m.nis', 'like', $search)->orWhere('m.member_code', 'like', $search)
+                    ->orWhere('l.loan_code', 'like', $search)->orWhere('b.title', 'like', $search)
+                    ->orWhere('bc.inventory_code', 'like', $search));
+            })
+            ->when($filters['class_id'] ?? null, fn ($query, $id) => $query->where('m.school_class_id', $id))
+            ->when($filters['start_date'] ?? null, fn ($query, $date) => $query->where('l.borrowed_at', '>=', $date.' 00:00:00'))
+            ->when($filters['end_date'] ?? null, fn ($query, $date) => $query->where('l.borrowed_at', '<', Carbon::parse($date)->addDay()->startOfDay()))
+            ->when($filters['status'] ?? null, function ($query, $status) {
+                if ($status === 'active' || $status === 'late') {
+                    $query->whereNull('li.returned_at')->where('li.due_date', $status === 'late' ? '<' : '>=', today()->toDateString());
+                } elseif ($status === 'lost') {
+                    $query->whereNotNull('li.returned_at')->where('li.return_condition', 'hilang');
+                } else {
+                    $query->whereNotNull('li.returned_at')->where(fn ($query) => $query
+                        ->whereNull('li.return_condition')->orWhere('li.return_condition', '!=', 'hilang'));
+                }
+            })
             ->select(
                 'li.id as item_id',
                 'li.due_date',
@@ -184,13 +249,17 @@ class LoanController extends Controller
                 'l.loan_code',
                 'l.borrowed_at',
                 'u.name as student_name',
+                'm.nis', 'm.member_code', 'sc.name as class_name',
                 'b.title as book_title',
                 'bc.inventory_code'
             )
             ->orderByDesc('l.borrowed_at')
-            ->paginate(10);
+            ->orderByDesc('li.id')
+            ->paginate(10)->appends($filters);
 
-        return view('loans.index', compact('loans'));
+        $classes = SchoolClass::orderBy('grade_level')->orderBy('name')->get();
+
+        return view('loans.index', compact('loans', 'classes', 'filters'));
     }
 
     public function returnItem(Request $request, int $loanItem)

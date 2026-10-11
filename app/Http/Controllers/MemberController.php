@@ -12,25 +12,51 @@ use Illuminate\Validation\Rule;
 
 class MemberController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $filters = $request->validate([
+            'q' => ['nullable', 'string', 'max:100'],
+            'class_id' => ['nullable', 'integer', 'exists:school_classes,id'],
+            'status' => ['nullable', 'in:active,inactive'],
+            'page' => ['nullable', 'integer', 'min:1'],
+        ], [
+            'q.string' => 'Kata pencarian harus berupa teks.',
+            'q.max' => 'Kata pencarian maksimal 100 karakter.',
+            'class_id.integer' => 'Kelas tidak valid.',
+            'class_id.exists' => 'Kelas tidak ditemukan.',
+            'status.in' => 'Status siswa tidak valid.',
+            'page.integer' => 'Nomor halaman tidak valid.',
+            'page.min' => 'Nomor halaman minimal 1.',
+        ]);
+        $filters['q'] = trim($filters['q'] ?? '');
         $studentQuery = Member::whereHas('user', fn ($query) => $query->where('role', 'anggota'));
         $memberStats = [
             'total' => (clone $studentQuery)->count(),
             'active' => (clone $studentQuery)->whereHas('user', fn ($query) => $query->where('is_active', true))->count(),
             'inactive' => (clone $studentQuery)->whereHas('user', fn ($query) => $query->where('is_active', false))->count(),
         ];
-        $members = Member::with(['user', 'schoolClass'])
-            ->whereHas('user', fn ($query) => $query->where('role', 'anggota'))
-            ->latest()
-            ->paginate(10);
+        $members = (clone $studentQuery)->with(['user', 'schoolClass'])
+            ->when($filters['q'] !== '', function ($query) use ($filters) {
+                $search = '%'.$filters['q'].'%';
+                $query->where(fn ($query) => $query->where('nis', 'like', $search)
+                    ->orWhere('member_code', 'like', $search)
+                    ->orWhereHas('user', fn ($user) => $user->where(fn ($user) => $user
+                        ->where('name', 'like', $search)->orWhere('email', 'like', $search))));
+            })
+            ->when($filters['class_id'] ?? null, fn ($query, $id) => $query->where('school_class_id', $id))
+            ->when($filters['status'] ?? null, fn ($query, $status) => $query
+                ->whereHas('user', fn ($user) => $user->where('is_active', $status === 'active')))
+            ->latest()->orderByDesc('id')
+            ->paginate(10)->appends($filters);
 
         $classes = SchoolClass::where('is_active', true)
             ->orderBy('grade_level')
             ->orderBy('name')
             ->get();
 
-        return view('members.index', compact('members', 'classes', 'memberStats'));
+        $filterClasses = SchoolClass::orderBy('grade_level')->orderBy('name')->get();
+
+        return view('members.index', compact('members', 'classes', 'filterClasses', 'memberStats', 'filters'));
     }
 
     public function store(Request $request)

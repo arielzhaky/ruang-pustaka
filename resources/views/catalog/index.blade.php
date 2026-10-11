@@ -70,7 +70,7 @@
                             <th scope="row" class="fw-normal">
                                 <a href="{{ route('catalog.show', array_merge(['book' => $book->id], request()->only(['q', 'category_id', 'page']))) }}"
                                    class="fw-semibold">{{ $book->title }}</a>
-                                @if ($book->source_url)<span class="d-block small text-secondary mt-1">Referensi digital · SIBI</span>@endif
+                                @if ($book->is_sibi_reference)<span class="d-block small text-secondary mt-1">Referensi digital · SIBI</span>@endif
                             </th>
                             <td>{{ $book->author }}</td>
                             <td>{{ $book->category->name }}</td>

@@ -40,7 +40,7 @@
     letter-spacing: -.8px;
     text-decoration: none;
 }
-.pustaka-login .login-story-content { width: 100%; max-width: 410px; margin: auto 0; padding: 72px 0; }
+.pustaka-login .login-story-content { width: 100%; max-width: 480px; margin: auto 0; padding: 48px 0; }
 .pustaka-login .login-eyebrow {
     margin: 0 0 15px;
     color: var(--muted);
@@ -58,20 +58,19 @@
 }
 .pustaka-login .login-story-title { margin: 0 0 24px; font-size: clamp(38px, 3.8vw, 58px); line-height: 1.12; }
 .pustaka-login .login-story-description { max-width: 350px; margin: 0; color: var(--muted); line-height: 1.9; }
-.pustaka-login .login-reading-card {
-    max-width: 350px;
-    margin-top: 36px;
-    padding: 24px;
+.pustaka-login .login-campus-card {
+    margin: 30px 0 0;
+    overflow: hidden;
     border: 1px solid #ffffff26;
-    border-radius: 12px;
-    background: #ffffff09;
-    box-shadow: 0 12px 30px #0c103820;
+    border-radius: 16px;
+    background: #ffffff0d;
+    box-shadow: 0 18px 40px #080d302e;
 }
-.pustaka-login .login-reading-card .login-eyebrow { font-size: 9px; margin-bottom: 13px; }
-.pustaka-login .login-reading-card h3 { margin: 0 0 10px; font-size: 23px; line-height: 1.3; letter-spacing: -.65px; font-weight: 600; }
-.pustaka-login .login-reading-card p:not(.login-eyebrow) { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.7; }
-.pustaka-login .login-reading-steps { display: flex; align-items: center; gap: 12px; margin-top: 23px; padding-top: 18px; border-top: 1px solid #ffffff20; color: #b7e7da; font-size: 10px; }
-.pustaka-login .login-reading-steps .step-line { height: 1px; flex: 1; background: #b7e7da66; }
+.pustaka-login .login-campus-card > img { display: block; width: 100%; height: auto; }
+.pustaka-login .login-campus-card figcaption { display: flex; align-items: center; gap: 13px; padding: 18px 20px; border-top: 1px solid #ffffff20; }
+.pustaka-login .login-campus-icon { display: grid; place-items: center; flex-shrink: 0; width: 38px; height: 38px; border-radius: 10px; background: #b7e7da15; color: #b7e7da; }
+.pustaka-login .login-campus-card strong { display: block; font-size: 12px; font-weight: 600; letter-spacing: .5px; line-height: 1.6; }
+.pustaka-login .login-campus-card figcaption div > span { display: block; margin-top: 3px; color: #c4cfe7; font-size: 11px; line-height: 1.6; }
 .pustaka-login .login-story-footer { margin: 0; color: var(--muted); font-size: 11px; }
 .pustaka-login .login-story::before, .pustaka-login .login-story::after { content: ""; position: absolute; z-index: -1; border-radius: 50%; pointer-events: none; }
 .pustaka-login .login-story::before { width: 360px; height: 360px; right: -200px; top: 18%; background: linear-gradient(140deg, #a9e4d327, #7973e60a); }
@@ -80,7 +79,7 @@
 .pustaka-login .login-school { margin: 14px 0 0 46px; color: #c4cfe9; font-size: 9px; font-weight: 550; letter-spacing: 1.6px; }
 .pustaka-login .login-story .login-eyebrow { color: #b7e7da; }
 .pustaka-login .login-story-title em { color: #b7e7da; }
-.pustaka-login .login-story-description, .pustaka-login .login-reading-card p:not(.login-eyebrow) { color: #c4cfe7; }
+.pustaka-login .login-story-description { color: #c4cfe7; }
 .pustaka-login .login-story-footer { color: #b1bdd9; }
 .pustaka-login .login-form-panel { background: radial-gradient(ellipse at 100% 0, #f0f1ff 0, transparent 55%), #fff; }
 .pustaka-login .login-form-wrap > .login-eyebrow { color: #5a5aaa; }
@@ -120,6 +119,14 @@
 .pustaka-login .login-notice { margin-bottom: 20px; padding: 13px 15px; border: 1px solid #d4e5da; border-radius: 6px; background: #f0f7f2; color: #28583c; font-size: 12px; line-height: 1.7; }
 .pustaka-login .login-notice-error { border-color: #edcfca; background: #fcf2f0; color: #883b2f; }
 .pustaka-login .login-notice ul { margin: 0; padding-left: 17px; }
+.login-methods { display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-bottom:24px; padding:5px; border-radius:8px; background:#f0f1fb; }
+.login-methods button { border:0; border-radius:5px; padding:10px 5px; color:#68728a; background:transparent; font-size:12px; }
+.login-methods button[aria-pressed=true] { background:#5b5bdf; color:white; }
+.pustaka-login .barcode-scanner { padding:18px; margin-bottom:0 !important; }
+.pustaka-login .scanner-actions button { font-size:12px; }
+.pustaka-login .scanner-code-field { min-width:0; flex-basis:100%; }
+.pustaka-login .scanner-camera-tools label { min-width:0; max-width:100%; }
+.pustaka-login .scanner-image-preview { margin-left:0; margin-right:0; }
 @media (min-width: 1500px) {
     .pustaka-login .login-story { padding-left: max(80px, calc((100vw - 1260px) / 2)); }
 }
@@ -133,7 +140,10 @@
     .pustaka-login { grid-template-columns: 1fr; }
     .pustaka-login .login-story { padding: 26px 24px; border-right: 0; border-bottom: 1px solid var(--line); }
     .pustaka-login .login-wordmark { font-size: 20px; }
-    .pustaka-login .login-story-content, .pustaka-login .login-story-footer { display: none; }
+    .pustaka-login .login-story-footer, .pustaka-login .login-story-content > :not(.login-campus-card) { display: none; }
+    .pustaka-login .login-story-content { max-width: 420px; margin: 0 auto; padding: 0; }
+    .pustaka-login .login-campus-card { margin-top: 22px; border-radius: 12px; }
+    .pustaka-login .login-campus-card figcaption { padding: 12px 14px; gap: 10px; }
     .pustaka-login .login-form-panel { align-items: flex-start; padding: 38px 24px 36px; }
     .pustaka-login .login-form-wrap { max-width: 420px; }
     .pustaka-login .login-title { font-size: 38px; }

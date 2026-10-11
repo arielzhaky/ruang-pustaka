@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\BookCopy;
+use App\Models\BookReservation;
 use App\Models\Category;
+use App\Models\LoanItem;
 use App\Support\BookDetails;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
@@ -18,11 +22,14 @@ class BookController extends Controller
             'q' => ['nullable', 'string', 'max:100'],
             'category_id' => ['nullable', 'integer', 'exists:categories,id'],
             'availability' => ['nullable', 'in:all,available,unavailable'],
+            'status' => ['nullable', 'in:active,archived'],
             'page' => ['nullable', 'integer', 'min:1'],
         ]);
         $query = Book::with('category')->withCount('copies')
             ->withCount(['copies as available_count' => fn ($q) => $q->available()])
-            ->whereNull('archived_at');
+            ->when(($filters['status'] ?? 'active') === 'archived',
+                fn ($q) => $q->whereNotNull('archived_at'),
+                fn ($q) => $q->whereNull('archived_at'));
         if ($search = $filters['q'] ?? null) {
             $query->where(fn ($q) => $q->where('title', 'like', "%{$search}%")
                 ->orWhere('author', 'like', "%{$search}%")->orWhere('isbn', 'like', "%{$search}%"));
@@ -162,13 +169,57 @@ class BookController extends Controller
             ->with('success', 'Data buku berhasil diubah.');
     }
 
+    public function updateCover(Request $request, Book $book)
+    {
+        $request->validate(['cover' => ['required', 'image', 'mimes:jpg,jpeg', 'extensions:jpg,jpeg', 'max:2048', 'dimensions:max_width=3000,max_height=3000']]);
+        $oldPath = $book->cover_path;
+        $path = $request->file('cover')->store('covers', 'public');
+        if (!$path) throw ValidationException::withMessages(['cover' => 'Cover gagal disimpan.']);
+        try { $book->update(['cover_path' => $path]); }
+        catch (\Throwable $e) { Storage::disk('public')->delete($path); throw $e; }
+        if ($oldPath && $oldPath !== $path) Storage::disk('public')->delete($oldPath);
+        return back()->with('success', 'Cover JPG untuk '.$book->title.' berhasil diperbarui.');
+    }
+
+    public function archive(Book $book)
+    {
+        DB::transaction(function () use ($book) {
+            // Ikuti urutan penguncian peminjaman: eksemplar, lalu judul buku.
+            $copyIds = BookCopy::where('book_id', $book->id)->orderBy('id')->lockForUpdate()->pluck('id');
+            $locked = Book::whereKey($book->id)->lockForUpdate()->firstOrFail();
+            if ($locked->archived_at !== null) {
+                return;
+            }
+            if (LoanItem::whereIn('book_copy_id', $copyIds)->whereNull('returned_at')->lockForUpdate()->first()) {
+                throw ValidationException::withMessages(['book' => 'Buku masih dipinjam. Selesaikan pengembalian sebelum mengarsipkan.']);
+            }
+            if (BookReservation::where('book_id', $book->id)->active()->lockForUpdate()->first()) {
+                throw ValidationException::withMessages(['book' => 'Buku masih memiliki reservasi aktif. Selesaikan atau batalkan reservasi sebelum mengarsipkan.']);
+            }
+            $locked->update(['archived_at' => now()]);
+        }, 3);
+
+        return redirect()->route('books.index')
+            ->with('success', 'Buku berhasil diarsipkan. Riwayat peminjaman dan eksemplar tetap tersimpan.');
+    }
+
+    public function restore(Book $book)
+    {
+        DB::transaction(function () use ($book) {
+            Book::whereKey($book->id)->lockForUpdate()->firstOrFail()->update(['archived_at' => null]);
+        }, 3);
+
+        return redirect()->route('books.index', ['status' => 'archived'])
+            ->with('success', 'Buku berhasil dipulihkan ke katalog aktif.');
+    }
+
     public function destroy(Book $book)
     {
         if ($book->copies()->exists()) {
             return redirect()->route('books.index')
                 ->with(
                     'error',
-                    'Buku tidak bisa dihapus karena sudah memiliki eksemplar.'
+                    'Buku memiliki eksemplar dan tidak bisa dihapus permanen. Gunakan tombol Arsipkan agar riwayat tetap tersimpan.'
                 );
         }
 

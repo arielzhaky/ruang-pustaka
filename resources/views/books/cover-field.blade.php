@@ -1,5 +1,5 @@
 <div class="mb-4">
-    <label for="cover" class="form-label">Cover buku (opsional)</label>
+    <label for="cover" class="form-label">Upload cover manual (JPG, PNG, WebP; opsional)</label>
     @if ($coverBook?->cover_path)
         <div class="mb-2">@include('books.cover', ['large' => false])</div>
         <div class="form-check mb-2">

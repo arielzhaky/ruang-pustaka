@@ -3,7 +3,7 @@
 @section('content')
 <main class="container py-5" style="max-width: 760px">
     <section class="bg-white rounded-4 shadow-sm p-4 p-md-5">
-        <a href="{{ route('home') }}" class="brand d-inline-block mb-3 text-decoration-none">RUANG PUSTAKA</a>
+        <a href="{{ route('home') }}" class="brand registration-brand mb-3 text-decoration-none"><x-library-logo/><span>RUANG PUSTAKA</span></a>
         <h1 class="h3 fw-bold">Buat Akun Siswa</h1>
         <p class="text-secondary">Daftar untuk melihat katalog dan memantau peminjamanmu. Kode anggota dibuat otomatis.</p>
         @if ($errors->any())

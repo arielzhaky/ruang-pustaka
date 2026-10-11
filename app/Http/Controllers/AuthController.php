@@ -8,6 +8,7 @@ use App\Models\LoanItem;
 use App\Models\Member;
 use App\Support\LoanCharges;
 use App\Support\ServiceSummary;
+use Carbon\CarbonImmutable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
@@ -48,6 +49,7 @@ class AuthController extends Controller
         }
 
         $request->session()->regenerate();
+        $request->session()->forget('student_login_qr_hash');
 
         return redirect()->route('dashboard');
     }
@@ -56,6 +58,8 @@ class AuthController extends Controller
     {
         $serviceSummary = ServiceSummary::for($request->user());
         if ($request->user()->role === 'petugas') {
+            $visitDate = CarbonImmutable::today();
+            $visitTotals = VisitController::totals($visitDate);
             $jumlahJudul = Book::whereNull('archived_at')->count();
             $jumlahSiswa = Member::whereHas('user', fn ($q) => $q->where('role', 'anggota')->where('is_active', true))->count();
             $sedangDipinjam = LoanItem::whereNull('returned_at')->count();
@@ -66,7 +70,7 @@ class AuthController extends Controller
                 ->withCount(['copies as available_count' => fn ($q) => $q->available()])
                 ->latest('id')->limit(6)->get();
 
-            return view('dashboard', compact('serviceSummary', 'jumlahJudul', 'jumlahSiswa', 'sedangDipinjam', 'terlambat', 'tersedia', 'sudahSelesai', 'latestBooks'));
+            return view('dashboard', compact('visitDate', 'visitTotals', 'serviceSummary', 'jumlahJudul', 'jumlahSiswa', 'sedangDipinjam', 'terlambat', 'tersedia', 'sudahSelesai', 'latestBooks'));
         }
 
         abort_unless($request->user()->role === 'anggota', 403);

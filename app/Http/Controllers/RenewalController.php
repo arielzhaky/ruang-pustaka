@@ -41,7 +41,7 @@ class RenewalController extends Controller
         if ($item->returned_at || $item->due_date->lt(today()) || $item->bookCopy->archived_at || $item->bookCopy->book->archived_at || ! $item->loan->member->user->is_active) {
             throw ValidationException::withMessages(['renewal' => 'Perpanjangan hanya berlaku untuk pinjaman aktif yang belum terlambat, siswa aktif, dan buku belum diarsipkan.']);
         }
-        if (BookReservation::active()->where('book_id', $item->bookCopy->book_id)->exists()) {
+        if (BookReservation::active()->where('book_id', $item->bookCopy->book_id)->lockForUpdate()->first()) {
             throw ValidationException::withMessages(['renewal' => 'Buku sedang direservasi siswa lain. Perpanjangan belum dapat disetujui.']);
         }
     }

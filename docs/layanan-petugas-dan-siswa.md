@@ -9,12 +9,12 @@ Ditambahkan 4 Oktober 2026. Data lama tetap dipertahankan.
 - **Tagihan & Pembayaran**: pelunasan penuh tunai/transfer dicatat setelah uang diterima. Jumlah berasal dari biaya pengembalian/kehilangan; tidak bisa diubah lewat formulir. Klik bukti pembayaran untuk cetak atau Simpan PDF dari dialog browser. Pembayaran sebagian belum disediakan.
 - **Aktivitas Petugas**: catatan tindakan web yang berhasil sejak fitur aktif, nama petugas, waktu, tindakan, ID sasaran bila tersedia. Tidak menyimpan isi formulir, sandi, atau token. Ini riwayat operasional, bukan catatan aktivitas sebelum fitur dipasang atau perubahan langsung melalui phpMyAdmin/CLI.
 - **Perpanjangan**: setujui atau tolak permintaan, dengan catatan wajib untuk penolakan.
-- **Reservasi Buku**: siapkan antrean paling awal ketika ada stok. Satu eksemplar ditahan selama dua hari sejak disiapkan. Klik Catat pengambilan dan pilih kode eksemplar yang disiapkan; penyimpanan peminjaman menyelesaikan reservasi secara otomatis.
+- **Reservasi Buku**: siapkan antrean paling awal ketika ada stok. Satu eksemplar ditahan selama dua hari sejak disiapkan. Klik Catat pengambilan: siswa dan kode eksemplar sudah dipilih otomatis. Periksa buku dan batas kembali, lalu simpan peminjaman untuk menyelesaikan reservasi. Tautan yang sudah kedaluwarsa, dibatalkan, atau tidak lagi bisa diproses kembali ke daftar reservasi dengan penjelasan.
 
 ## Siswa
 
 - **Pengaturan Akun**: ubah nama, email, nomor telepon, serta kata sandi. Perubahan profil memerlukan kata sandi saat ini. NIS, kelas, peran, dan status anggota tetap ditangani petugas.
-- **Peminjaman Saya**: ajukan perpanjangan. Maksimal satu persetujuan per eksemplar, tambahan tujuh hari dihitung dari batas kembali semula. Batas kembali lama tetap berlaku selama menunggu. Permintaan ditolak otomatis ketika pinjaman ditutup. Permintaan yang ditolak dapat diajukan ulang jika syarat sudah terpenuhi; halaman menampilkan permintaan terakhir untuk eksemplar tersebut.
+- **Peminjaman Saya**: buka Ajukan perpanjangan, isi alasan opsional (maksimal 500 karakter), lalu kirim pengajuan. Maksimal satu persetujuan per eksemplar, tambahan tujuh hari dihitung dari batas kembali semula. Batas kembali lama tetap berlaku selama menunggu. Permintaan ditolak otomatis ketika pinjaman ditutup. Catatan penolakan petugas tampil di Peminjaman Saya. Permintaan yang ditolak dapat diajukan ulang jika syarat sudah terpenuhi; halaman menampilkan permintaan terakhir untuk eksemplar tersebut.
 - **Detail Buku → Reservasi buku**: maksimal tiga judul aktif, satu antrean aktif per siswa/judul. Judul harus memiliki eksemplar fisik berkondisi baik, termasuk yang sedang dipinjam. Koleksi referensi tanpa stok fisik tidak bisa direservasi. Siswa tidak dapat mereservasi judul yang masih dipinjamnya.
 - **Pengingat**: daftar pribadi untuk buku yang jatuh tempo dua hari lagi, hari ini, atau terlambat. Pengingat tampil dalam web dan diperbarui saat halaman dibuka. Tidak mengirim email/WhatsApp atau notifikasi ketika aplikasi ditutup.
 - **Tagihan Saya**: tagihan pribadi dan bukti pelunasan. Siswa lain tidak dapat membuka bukti tersebut.
@@ -47,3 +47,10 @@ Tunnel memakai HTTPS, sementara server PHP lokal menerima HTTP. `bootstrap/app.p
 Muat ulang halaman menggunakan ⌘⇧R setelah perubahan. Ports adalah akses tunnel ke aplikasi yang tetap berjalan di komputer, sehingga server lokal dan tunnel perlu aktif. Untuk hosting permanen, konfigurasi proxy harus mengikuti alamat proxy hosting yang digunakan; jangan menganggap semua proxy tepercaya.
 
 Rujukan: [Laravel trusted proxies](https://laravel.com/docs/12.x/requests#configuring-trusted-proxies) dan [VS Code port forwarding](https://code.visualstudio.com/docs/debugtest/port-forwarding).
+
+## Verifikasi
+
+- Suite pengujian aplikasi: 173 pengujian lulus, 1.430 assertion.
+- `php tests/Support/library_services_concurrency.php`: pengiriman pembayaran bersamaan tetap satu bukti, penyiapan reservasi bersamaan tetap satu pemegang eksemplar, persetujuan bersamaan hanya memperpanjang sekali. Skrip membuat dan menghapus database MySQL sementara sendiri.
+- Alur browser diuji dengan akun dan database pratinjau terpisah: login petugas/siswa, pembayaran dengan CSRF, bukti cetak PDF, persetujuan perpanjangan, penyiapan reservasi, dan aktivitas. Halaman kedua peran diperiksa pada lebar 1440, 390, dan 320 piksel.
+- URL aset tunnel HTTPS, akses lokal HTTP, serta penolakan header proxy dari IP luar loopback memiliki pengujian sendiri.

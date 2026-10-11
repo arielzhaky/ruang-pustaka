@@ -42,9 +42,10 @@
         <div><span>Siswa aktif</span><strong>{{ $memberStats['active'] }} aktif</strong><small>Dapat mengakses perpustakaan</small></div>
         <div><span>Siswa nonaktif</span><strong>{{ $memberStats['inactive'] }} nonaktif</strong><small>Riwayat tetap tersimpan</small></div>
     </div>
+    <p class="small text-secondary">Ringkasan mencakup seluruh siswa. Filter di bawah hanya berlaku pada daftar siswa; ekspor CSV tetap memuat seluruh siswa.</p>
     @include('shared.csv-transfer', ['kind' => 'members'])
 
-    <details class="panel-toggle" id="add-student" @if ($errors->any() && ! $errors->has('file')) open @endif>
+    <details class="panel-toggle" id="add-student" @if ($errors->hasAny(['name', 'email', 'password', 'nis', 'member_code', 'school_class_id', 'phone', 'gender', 'age'])) open @endif>
         <summary>+ Tambah Siswa <span class="text-secondary fw-normal ms-2">Buat akun dan profil anggota</span></summary>
         <div class="panel-toggle-body">
 
@@ -130,7 +131,36 @@
     </details>
 
     <section class="bg-white rounded-4 shadow-sm p-4">
-        <h2 class="h5 mb-3">Daftar Siswa</h2>
+        <div class="d-flex flex-wrap gap-3 justify-content-between mb-3"><h2 class="h5 mb-0">Daftar Siswa</h2><a class="btn btn-outline-primary" href="{{ route('print-queue.index', ['type'=>'members']) }}">Pilih beberapa kartu / Download PDF</a></div>
+
+        <form action="{{ route('members.index') }}" method="GET" class="row g-3 mb-4" role="search" aria-label="Cari dan filter siswa">
+            <div class="col-lg-6">
+                <label for="member-filter-search" class="form-label">Nama, email, NIS, atau kode anggota</label>
+                <input id="member-filter-search" name="q" type="search" class="form-control" maxlength="100" value="{{ $filters['q'] }}" placeholder="Cari siswa...">
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <label for="member-filter-class" class="form-label">Kelas</label>
+                <select id="member-filter-class" name="class_id" class="form-select">
+                    <option value="">Semua kelas</option>
+                    @foreach ($filterClasses as $schoolClass)
+                        <option value="{{ $schoolClass->id }}" @selected(($filters['class_id'] ?? '') == $schoolClass->id)>{{ $schoolClass->name }}{{ $schoolClass->is_active ? '' : ' (tidak aktif)' }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <label for="member-filter-status" class="form-label">Status akun</label>
+                <select id="member-filter-status" name="status" class="form-select">
+                    <option value="">Semua status</option>
+                    <option value="active" @selected(($filters['status'] ?? '') === 'active')>Aktif</option>
+                    <option value="inactive" @selected(($filters['status'] ?? '') === 'inactive')>Tidak aktif</option>
+                </select>
+            </div>
+            <div class="col-12 d-flex gap-2">
+                <button type="submit" class="btn btn-primary">Cari siswa</button>
+                <a href="{{ route('members.index') }}" class="btn btn-outline-primary">Reset filter</a>
+            </div>
+        </form>
+        <p class="small text-secondary" role="status">{{ $members->total() }} siswa ditemukan.</p>
 
         <div class="table-responsive">
     <table class="table align-middle">
@@ -150,6 +180,8 @@
                     <td>{{ $member->user?->email ?? '—' }}<small class="d-block text-secondary">{{ $member->phone ?: 'Telepon belum diisi' }}</small></td>
                     <td><span class="badge {{ $member->user?->is_active ? 'text-bg-success' : 'text-bg-secondary' }}">{{ $member->user?->is_active ? 'Aktif' : 'Tidak aktif' }}</span></td>
                     <td><div class="d-flex gap-2">
+                        <a href="{{ route('members.card', $member) }}" class="btn btn-sm btn-outline-primary">Kartu / Barcode</a>
+                        <a href="{{ route('members.card', $member) }}" class="btn btn-sm btn-outline-primary">Kartu / Barcode</a>
                         <a href="{{ route('members.edit', $member) }}" class="btn btn-sm btn-outline-primary">Ubah</a>
                         <form action="{{ route('members.destroy', $member) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus siswa ini beserta akun loginnya?')">
                             @csrf @method('DELETE')
@@ -158,7 +190,7 @@
                     </div></td>
                 </tr>
             @empty
-                <tr><td colspan="7" class="text-center text-secondary py-4">Belum ada siswa.</td></tr>
+                <tr><td colspan="7" class="text-center text-secondary py-4">Tidak ada siswa pada halaman ini. Ubah pencarian atau reset filter untuk melihat daftar siswa.</td></tr>
             @endforelse
         </tbody>
     </table>

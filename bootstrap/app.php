@@ -24,5 +24,5 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->web(append: [EnsureAccountIsActive::class, RecordStaffActivity::class]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        //
+        $exceptions->dontFlash(['student_qr']);
     })->create();

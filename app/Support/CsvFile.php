@@ -7,6 +7,17 @@ use Illuminate\Validation\ValidationException;
 
 class CsvFile
 {
+    public static function hasHeader(Request $request, string $header): bool
+    {
+        $request->validate(['file' => ['required', 'file', 'max:2048', 'extensions:csv']]);
+        $handle = fopen($request->file('file')->getRealPath(), 'r');
+        try {
+            $line = preg_replace('/^\xEF\xBB\xBF/', '', fgets($handle) ?: '');
+            return in_array($header, array_map(fn($v) => strtolower(trim($v)), str_getcsv($line, ',', '"', '')), true)
+                || in_array($header, array_map(fn($v) => strtolower(trim($v)), str_getcsv($line, ';', '"', '')), true);
+        } finally { fclose($handle); }
+    }
+
     public static function read(Request $request, array $headers, array $optionalHeaders = []): array
     {
         $request->validate(['file' => ['required', 'file', 'max:2048', 'extensions:csv']], [

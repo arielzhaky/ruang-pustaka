@@ -26,7 +26,8 @@ svg { vertical-align: middle; flex-shrink: 0; }
 .home-button-primary { background: var(--blue); color: #fff; box-shadow: 0 4px 10px #5b5bdf18; }
 .home-button-primary:hover { background: #4646c5; transform: translateY(-2px); }
 .home-hero { position: relative; isolation: isolate; overflow: hidden; min-height: 700px; color: #fff; background: radial-gradient(ellipse at 55% -45%, #2b5380 0, transparent 68%), linear-gradient(145deg, #1c315b 0, #171b49 52%, #180e3b 100%); }
-.home-hero::after { content: ""; position: absolute; z-index: -1; inset: 0; opacity: .24; background-image: radial-gradient(#d3d8ff 1px, transparent 1px); background-size: 76px 76px; mask-image: linear-gradient(90deg, #000, transparent 38%, transparent 62%, #000); }
+.hero-school-photo { position: absolute; inset: 0; z-index: -3; width: 100%; height: 100%; object-fit: cover; object-position: center; pointer-events: none; }
+.home-hero::after { content: ""; position: absolute; z-index: -2; inset: 0; background: linear-gradient(180deg, #13254ba6, #142347a6 45%, #171638e6); pointer-events: none; }
 .hero-orb { position: absolute; border-radius: 50%; z-index: -1; pointer-events: none; }
 .hero-orb-one { width: 520px; height: 520px; top: -270px; right: -80px; background: linear-gradient(135deg, #48bcb34d, #4855d705 70%); }
 .hero-orb-two { width: 440px; height: 440px; bottom: -290px; left: -100px; background: radial-gradient(circle at 70% 0%, #5b4acf55, #21184605 70%); }
@@ -36,7 +37,7 @@ svg { vertical-align: middle; flex-shrink: 0; }
 .hero-school { margin: 16px 0 0; color: #e6ecff; font-size: clamp(13px, 1.3vw, 17px); font-weight: 600; letter-spacing: 2px; }
 .hero-content h1 { font-size: clamp(40px, 4.7vw, 68px); line-height: 1.14; font-weight: 650; letter-spacing: -2.7px; margin: 24px -8px 22px; }
 .hero-content h1 em { font-family: Georgia, "Times New Roman", serif; font-weight: 400; color: #b7e7da; font-size: .99em; letter-spacing: -2.8px; }
-.hero-description { color: #bec7e1; font-size: 15px; line-height: 1.85; margin: 0 0 32px; }
+.hero-description { color: #e1e7f5; font-size: 15px; line-height: 1.85; margin: 0 0 32px; }
 .hero-search { display: flex; align-items: center; gap: 14px; max-width: 580px; margin: auto; padding: 7px 7px 7px 19px; border: 1px solid #ffffffc9; border-radius: 10px; background: #fff; box-shadow: 0 12px 45px #0907293b; }
 .hero-search-icon { color: #9399ad; }
 .hero-search input { width: 100%; min-width: 0; height: 43px; padding: 0; color: #29324a; border: 0; background: transparent; outline-offset: 2px; font-size: 13px; }
@@ -183,7 +184,7 @@ svg { vertical-align: middle; flex-shrink: 0; }
     .home-nav-actions .home-button svg { display: none; }
     .home-login-link { font-size: 12px; }
     .home-hero { min-height: 740px; }
-    .hero-content { width: calc(100% - 40px); padding: 62px 0 260px; }
+    .hero-content { width: calc(100% - 40px); padding: 62px 0 100px; }
     .hero-eyebrow { font-size: 8px; gap: 7px; letter-spacing: 1px; }
     .hero-content h1 { font-size: clamp(32px, 8.7vw, 48px); line-height: 1.18; letter-spacing: -1.6px; margin: 24px 0 20px; }
     .hero-content h1 em { letter-spacing: -1.4px; }

@@ -1,6 +1,7 @@
 @props(['name' => 'book', 'size' => 18])
 <svg {{ $attributes }} width="{{ $size }}" height="{{ $size }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 @switch($name)
+    @case('barcode') <path d="M3 4v16M7 4v16M10 4v16M14 4v16M16 4v16M21 4v16"/> @break
     @case('dashboard') <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/> @break
     @case('users') <circle cx="9" cy="8" r="3"/><path d="M3 21v-3a6 6 0 0 1 12 0v3M16 5a3 3 0 0 1 0 6m2 4a5 5 0 0 1 3 4v2"/> @break
     @case('category') <path d="m3 3 8 .1L21 13l-8 8L3 11Z"/><circle cx="7" cy="7" r="1"/> @break

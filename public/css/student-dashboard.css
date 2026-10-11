@@ -104,7 +104,8 @@
     .student-book-cover:hover .library-cover, .student-book-cover:focus-visible .library-cover, .student-book-cover:active .library-cover { transform: none; }
 }
 @media print {
-    @page { size: A6 landscape; margin: 10mm; }
+    @page library-member-card { size: 148mm 105mm; margin: 10mm; }
+    .member-card-page { page: library-member-card; }
     body:has(.member-card-page), body:has(.member-card-page) .workspace-main { background: #fff; }
     body:has(.member-card-page) .workspace-sidebar, body:has(.member-card-page) .workspace-topbar, body:has(.member-card-page) .workspace-footer, body:has(.member-card-page) .skip-link { display: none !important; }
     body:has(.member-card-page) .workspace-main { margin: 0; min-height: 0; }

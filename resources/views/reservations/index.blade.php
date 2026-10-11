@@ -9,7 +9,7 @@
 @if(in_array($reservation->display_status, ['Mengantre','Siap diambil']))
     @if(auth()->user()->role === 'petugas')
         @if($reservation->status === 'waiting')<form method="POST" action="{{ route('reservations.ready', $reservation) }}" class="mb-2">@csrf<button class="btn btn-sm btn-primary" @disabled($reservation->queue_position !== 1)>Siapkan buku</button></form>
-        @else<a href="{{ route('loans.create', ['member_id'=>$reservation->member_id]) }}" class="btn btn-sm btn-primary mb-2">Catat pengambilan</a>@endif
+        @else<a href="{{ route('loans.create', ['reservation_id'=>$reservation->id]) }}" class="btn btn-sm btn-primary mb-2">Catat pengambilan</a>@endif
     @else @if($reservation->status === 'ready')<p class="small">Temui petugas sebelum batas waktu di atas.</p>@endif @endif
     <form method="POST" action="{{ route('reservations.cancel', $reservation) }}" onsubmit="return confirm('Batalkan reservasi ini?')">@csrf @method('DELETE')<button class="btn btn-sm btn-outline-danger">Batalkan reservasi</button></form>
 @else<span class="text-secondary">Selesai</span>@endif

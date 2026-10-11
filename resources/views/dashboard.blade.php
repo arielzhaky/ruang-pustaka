@@ -32,6 +32,7 @@
                 </div>
             @endforeach
         </div>
+        <section class="my-4"><div class="d-flex justify-content-between align-items-center mb-3"><h2 class="h5 mb-0">Pengunjung perpustakaan</h2><a href="{{ route('visits.index') }}">Catat / lihat pengunjung →</a></div>@include('visits.summary')</section>
         @include('dashboard.services')
         @include('dashboard.staff-books')
         <div class="mt-4">@include('shared.borrowing-rules')</div>

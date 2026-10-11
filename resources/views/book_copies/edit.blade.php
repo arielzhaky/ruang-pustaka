@@ -70,6 +70,14 @@
                 </select>
             </div>
 
+            <div class="mb-4">
+                <label for="import_unavailable" class="form-label">Ketersediaan dari data sekolah</label>
+                <select id="import_unavailable" name="import_unavailable" class="form-select">
+                    <option value="0" @selected(!old('import_unavailable', $copy->import_unavailable))>Sudah diperiksa, boleh dipinjam</option>
+                    <option value="1" @selected(old('import_unavailable', $copy->import_unavailable))>Belum tersedia menurut data impor</option>
+                </select>
+                <div class="form-text">Periksa keberadaan buku sebelum mengubah menjadi tersedia. Riwayat peminjaman tetap berlaku.</div>
+            </div>
             <button type="submit" class="btn btn-primary">
                 Simpan Perubahan
             </button>

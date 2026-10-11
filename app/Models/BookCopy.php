@@ -14,6 +14,7 @@ class BookCopy extends Model
         'inventory_code',
         'shelf_location',
         'condition',
+        'import_unavailable',
         'archived_at',
     ];
 
@@ -21,13 +22,15 @@ class BookCopy extends Model
     {
         return [
             'archived_at' => 'datetime',
+            'import_unavailable' => 'boolean',
         ];
     }
 
     // Digunakan katalog dan detail agar jumlah tersedia dihitung dengan aturan sama.
     public function scopeAvailable(Builder $query): Builder
     {
-        return $query->whereNull('archived_at')->where('condition', 'baik')
+        return $query->where('import_unavailable', false)->whereNull('archived_at')->where('condition', 'baik')
+            ->whereHas('book', fn ($books) => $books->whereNull('archived_at'))
             ->whereDoesntHave('reservations', fn ($holds) => $holds->where('status', 'ready')->where('expires_at', '>', now()))
             ->whereDoesntHave('loanItems', fn ($items) => $items->whereNull('returned_at'));
     }

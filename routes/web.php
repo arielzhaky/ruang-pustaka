@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BarcodeController;
 use App\Http\Controllers\BillingController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\BookCopyController;
@@ -16,16 +17,20 @@ use App\Http\Controllers\MemberCardController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\MyLoanController;
 use App\Http\Controllers\OperationsController;
+use App\Http\Controllers\PrintQueueController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\RenewalController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\SchoolClassController;
+use App\Http\Controllers\StudentQrLoginController;
+use App\Http\Controllers\VisitController;
 use App\Http\Middleware\EnsurePetugas;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeController::class)->name('home');
 
 Route::middleware('guest')->group(function () {
+    Route::post('/login/qr', [StudentQrLoginController::class, 'login'])->middleware('throttle:10,1')->name('login.qr');
     Route::get('/register', [RegistrationController::class, 'create'])->name('register');
     Route::post('/register', [RegistrationController::class, 'store'])->middleware('throttle:5,1')->name('register.store');
 
@@ -40,6 +45,7 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::view('/borrowing-rules', 'borrowing-rules')->name('borrowing-rules');
     Route::get('/member-card', MemberCardController::class)->name('member-card');
+    Route::post('/member-card/login-qr', [StudentQrLoginController::class, 'update'])->middleware('throttle:5,1')->name('member-card.login-qr');
     Route::get('/favorites', [FavoriteBookController::class, 'index'])->name('favorites.index');
     Route::post('/favorites/{book}', [FavoriteBookController::class, 'store'])->name('favorites.store');
     Route::delete('/favorites/{book}', [FavoriteBookController::class, 'destroy'])->name('favorites.destroy');
@@ -84,6 +90,10 @@ Route::middleware(['auth', EnsurePetugas::class])->group(function () {
     Route::delete('/books/{book}', [BookController::class, 'destroy'])
         ->name('books.destroy');
 
+    Route::post('/books/{book}/cover', [BookController::class, 'updateCover'])->name('books.cover');
+    Route::patch('/books/{book}/archive', [BookController::class, 'archive'])->name('books.archive');
+    Route::patch('/books/{book}/restore', [BookController::class, 'restore'])->name('books.restore');
+
     Route::get('/books/{book}', [BookController::class, 'show'])->name('books.show');
 
     Route::get('/books/{book}/edit', [BookController::class, 'edit'])
@@ -97,6 +107,8 @@ Route::middleware(['auth', EnsurePetugas::class])->group(function () {
 
     Route::post('/books/{book}/copies', [BookCopyController::class, 'store'])
         ->name('copies.store');
+
+    Route::patch('/books/{book}/stock', [BookCopyController::class, 'updateStock'])->name('copies.stock');
 
     Route::get('/books/{book}/copies/{copy}/edit', [BookCopyController::class, 'edit'])
         ->name('copies.edit');
@@ -175,4 +187,22 @@ Route::middleware(['auth', EnsurePetugas::class])->group(function () {
     Route::post('/renewals/{renewal}/review', [RenewalController::class, 'review'])->name('renewals.review');
     Route::get('/overdue', [OperationsController::class, 'overdue'])->name('overdue.index');
     Route::get('/activity', [OperationsController::class, 'activity'])->name('activity.index');
+});
+
+Route::middleware(['auth', EnsurePetugas::class])->group(function () {
+    Route::get('/scan', [BarcodeController::class, 'index'])->name('barcodes.index');
+    Route::get('/scan/lookup', [BarcodeController::class, 'lookup'])->middleware('throttle:120,1')->name('barcodes.lookup');
+    Route::get('/members/{member}/card', [BarcodeController::class, 'memberCard'])->name('members.card');
+    Route::post('/members/{member}/login-qr', [StudentQrLoginController::class, 'update'])->middleware('throttle:20,1')->name('members.login-qr');
+    Route::get('/books/{book}/barcode-labels', [BarcodeController::class, 'copyLabels'])->name('barcodes.copies.print');
+});
+
+Route::middleware(['auth', EnsurePetugas::class])->group(function () {
+    Route::get('/visits', [VisitController::class, 'index'])->name('visits.index');
+    Route::post('/visits', [VisitController::class, 'store'])->middleware('throttle:120,1')->name('visits.store');
+    Route::delete('/visits/{visit}', [VisitController::class, 'destroy'])->name('visits.destroy');
+    Route::get('/print-queue', [PrintQueueController::class, 'index'])->name('print-queue.index');
+    Route::post('/print-queue', [PrintQueueController::class, 'store'])->name('print-queue.store');
+    Route::post('/print-queue/remove', [PrintQueueController::class, 'destroy'])->name('print-queue.remove');
+    Route::post('/print-queue/download', [PrintQueueController::class, 'download'])->middleware('throttle:10,1')->name('print-queue.download');
 });

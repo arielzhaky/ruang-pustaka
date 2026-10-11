@@ -11,6 +11,8 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 class Book extends Model
 {
     protected $fillable = [
+        'catalog_code',
+        'import_aliases',
         'category_id',
         'isbn',
         'title',
@@ -28,10 +30,21 @@ class Book extends Model
     protected function casts(): array
     {
         return [
+            'import_aliases' => 'array',
             'publication_year' => 'integer',
             'replacement_price' => 'integer',
             'archived_at' => 'datetime',
         ];
+    }
+
+    public function getIsSibiReferenceAttribute(): bool
+    {
+        return parse_url($this->source_url ?? '', PHP_URL_HOST) === 'buku.kemendikdasmen.go.id';
+    }
+
+    public function getIsIllustratedCoverAttribute(): bool
+    {
+        return str_starts_with($this->cover_path ?? '', 'covers/illustrated/');
     }
 
     // Satu judul buku termasuk dalam satu kategori.

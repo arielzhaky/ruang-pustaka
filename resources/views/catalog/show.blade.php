@@ -22,6 +22,9 @@
                     <span class="badge text-bg-success mb-3">{{ $book->category->name }}</span>
                     <h1 class="text-break mb-2">{{ $book->title }}</h1>
                     <p class="text-secondary text-break mb-0">Oleh {{ $book->author }}</p>
+                    @if ($book->is_illustrated_cover)
+                        <p class="small text-secondary mt-2 mb-0">Sampul ilustrasi Ruang Pustaka, dibuat berdasarkan data buku. Tampilan sampul fisik dapat berbeda.</p>
+                    @endif
                     @unless ($staffView)<div class="mt-3">@include('shared.favorite-button', ['favoriteBook' => $book, 'returnTo' => 'detail'])</div>@endunless
                     <dl class="book-metadata">
                         <div><dt>ISBN</dt><dd>{{ $book->isbn ?: 'Belum dicantumkan' }}</dd></div>
@@ -37,8 +40,8 @@
             </div>
             @if ($book->source_url)
                 <div class="reference-book-note mt-4">
-                    <div><strong>Koleksi referensi digital</strong><p class="small mb-0">Sumber: SIBI · Pusat Perbukuan Kemendikdasmen. Baca melalui situs resmi; stok fisik dicatat terpisah oleh petugas.</p></div>
-                    <a href="{{ $book->source_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Baca di SIBI ↗</a>
+                    <div><strong>{{ $book->is_sibi_reference ? 'Koleksi referensi digital' : 'Referensi informasi buku' }}</strong><p class="small mb-0">{{ $book->is_sibi_reference ? 'Sumber: SIBI · Pusat Perbukuan Kemendikdasmen. Baca melalui situs resmi; stok fisik dicatat terpisah oleh petugas.' : 'Lihat informasi edisi dan sampul pada sumber katalog. Peminjaman buku fisik dilayani oleh petugas perpustakaan.' }}</p></div>
+                    <a href="{{ $book->source_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">{{ $book->is_sibi_reference ? 'Baca di SIBI' : 'Sumber katalog' }} ↗</a>
                 </div>
             @endif
         </article>
@@ -78,6 +81,7 @@
                             <td>
                                 @if ($copy->condition === 'rusak')<span class="badge text-bg-warning">Rusak — tidak tersedia</span>
                                 @elseif ($copy->condition === 'hilang')<span class="badge text-bg-secondary">Hilang — tidak tersedia</span>
+                                @elseif ($copy->import_unavailable)<span class="badge text-bg-secondary">Belum tersedia (data impor)</span>
                                 @elseif ($copy->is_reserved)<span class="badge text-bg-warning">Disiapkan untuk reservasi</span>
                                 @elseif ($copy->is_borrowed)<span class="badge text-bg-primary">Sedang dipinjam</span>
                                 @else<span class="badge text-bg-success">Tersedia</span>@endif

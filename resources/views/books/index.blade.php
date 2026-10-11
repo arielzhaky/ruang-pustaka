@@ -38,16 +38,21 @@
 
     <section class="bg-white rounded-4 shadow-sm p-4">
         <h2 class="h5">Daftar Judul Buku</h2>
+        <p class="text-secondary small">Arsipkan buku untuk menyembunyikannya dari katalog tanpa menghapus eksemplar dan riwayat peminjaman.</p>
         <form method="GET" action="{{ route('books.index') }}" class="row g-2 align-items-end my-3">
             <div class="col-md-4"><label for="q" class="form-label">Judul, penulis, atau ISBN</label><input id="q" name="q" class="form-control" maxlength="100" value="{{ $filters['q'] ?? '' }}"></div>
-            <div class="col-md-3"><label for="category_id" class="form-label">Kategori</label><select name="category_id" id="category_id" class="form-select">
+            <div class="col-md-2"><label for="category_id" class="form-label">Kategori</label><select name="category_id" id="category_id" class="form-select">
                 <option value="">Semua kategori</option>
                 @foreach ($categories as $category)<option value="{{ $category->id }}" @selected(($filters['category_id'] ?? '') == $category->id)>{{ $category->name }}</option>@endforeach
             </select></div>
-            <div class="col-md-3"><label for="availability" class="form-label">Ketersediaan</label><select name="availability" id="availability" class="form-select">
+            <div class="col-md-2"><label for="availability" class="form-label">Ketersediaan</label><select name="availability" id="availability" class="form-select">
                 @foreach (['all' => 'Semua stok', 'available' => 'Tersedia', 'unavailable' => 'Tidak tersedia'] as $key => $label)
                     <option value="{{ $key }}" @selected(($filters['availability'] ?? 'all') === $key)>{{ $label }}</option>
                 @endforeach
+            </select></div>
+            <div class="col-md-2"><label for="status" class="form-label">Status buku</label><select name="status" id="status" class="form-select">
+                <option value="active" @selected(($filters['status'] ?? 'active') === 'active')>Aktif</option>
+                <option value="archived" @selected(($filters['status'] ?? 'active') === 'archived')>Diarsipkan</option>
             </select></div>
             <div class="col-md-2 d-flex gap-2 flex-wrap"><button class="btn btn-primary">Cari</button><a href="{{ route('books.index') }}" class="btn btn-outline-secondary">Reset</a></div>
         </form>
@@ -70,23 +75,52 @@
     @forelse ($books as $book)
         <tr>
             <td>{{ $books->firstItem() + $loop->index }}</td>
-            <td><div class="d-flex align-items-center gap-2">@include('books.cover', ['coverBook' => $book])<a class="fw-semibold" href="{{ route('books.show', array_merge(['book' => $book->id], request()->only(['q', 'category_id', 'availability', 'page']))) }}">{{ $book->title }}</a></div></td>
+            <td><div class="d-flex align-items-center gap-2">@include('books.cover', ['coverBook' => $book])
+                @if ($book->archived_at)
+                    <div><span class="fw-semibold">{{ $book->title }}</span><small class="d-block text-secondary">Diarsipkan {{ $book->archived_at->format('d/m/Y') }}</small></div>
+                @else
+                    <a class="fw-semibold" href="{{ route('books.show', array_merge(['book' => $book->id], request()->only(['q', 'category_id', 'availability', 'page']))) }}">{{ $book->title }}</a>
+                @endif
+            </div>
+            <details class="mt-2">
+                <summary class="small text-primary">Upload cover JPG</summary>
+                <form action="{{ route('books.cover', $book) }}" method="POST" enctype="multipart/form-data" class="mt-2">
+                    @csrf
+                    <label class="form-label small" for="cover-{{ $book->id }}">Cover {{ $book->title }}</label>
+                    <input id="cover-{{ $book->id }}" name="cover" type="file" accept=".jpg,.jpeg,image/jpeg" class="form-control form-control-sm" required>
+                    <small class="text-secondary d-block">Maksimal 2 MB / 3000 × 3000 piksel.</small>
+                    <button class="btn btn-sm btn-primary mt-2">Simpan cover</button>
+                </form>
+            </details></td>
             <td>{{ $book->category->name }}</td>
             <td>{{ $book->author }}</td>
             <td>{{ $book->isbn ?? '—' }}</td>
             <td>{{ $book->copies_count }} tercatat<br><small class="text-success">{{ $book->available_count }} tersedia</small></td>
             <td>
-                <div class="d-flex gap-2">
+                <div class="d-flex gap-2 flex-wrap">
+                    @if ($book->archived_at)
+                        <form action="{{ route('books.restore', $book) }}" method="POST" onsubmit="return confirm('Pulihkan buku ini ke katalog aktif?')">
+                            @csrf
+                            @method('PATCH')
+                            <button type="submit" class="btn btn-sm btn-outline-primary">Pulihkan</button>
+                        </form>
+                    @else
                     <a href="{{ route('books.show', $book) }}" class="btn btn-sm btn-outline-primary">Detail</a>
                     <a href="{{ route('copies.index', $book) }}
                     "class="btn btn-sm btn-outline-secondary">
-    Eksemplar
+    Stok / Eksemplar
 </a>
                     <a href="{{ route('books.edit', $book) }}"
                     class="btn btn-sm btn-outline-primary">
-                        Ubah
+                        Ubah / Cover
                     </a>
 
+                    <form action="{{ route('books.archive', $book) }}" method="POST" onsubmit="return confirm('Arsipkan buku ini? Buku disembunyikan dari katalog, sedangkan riwayat dan eksemplar tetap tersimpan.')">
+                        @csrf
+                        @method('PATCH')
+                        <button type="submit" class="btn btn-sm btn-outline-secondary">Arsipkan</button>
+                    </form>
+                    @if ($book->copies_count === 0)
                     <form action="{{ route('books.destroy', $book) }}" method="POST"onsubmit="return confirm('Yakin ingin menghapus buku ini?')">
                         @csrf
                         @method('DELETE')
@@ -95,6 +129,8 @@
                             Hapus
                         </button>
                     </form>
+                    @endif
+                    @endif
                 </div>
             </td>
         </tr>

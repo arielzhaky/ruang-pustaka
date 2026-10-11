@@ -48,7 +48,7 @@ class ReservationController extends Controller
             if (BookReservation::active()->where('member_id', $member->id)->where('book_id', $book->id)->exists()) {
                 return;
             }
-            if (! $book->copies()->whereNull('archived_at')->where('condition', 'baik')->exists()) {
+            if (! $book->copies()->where('import_unavailable', false)->whereNull('archived_at')->where('condition', 'baik')->exists()) {
                 throw ValidationException::withMessages(['reservation' => 'Reservasi hanya tersedia untuk judul dengan eksemplar fisik berkondisi baik.']);
             }
             if (BookReservation::active()->where('member_id', $member->id)->count() >= config('library.max_reservations')) {

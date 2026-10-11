@@ -1,0 +1,81 @@
+.library-barcode { box-sizing:border-box; display:flex; flex-direction:column; align-items:center; padding:10px 22px 7px; background:#fff; border:1px solid #e3e6f1; border-radius:6px; color:#000; max-width:100%; overflow:hidden; }
+.barcode-graphic { width:100%; display:flex; justify-content:center; }
+.barcode-graphic svg { display:block; width:100%; max-width:300px; height:54px; shape-rendering:crispEdges; }
+.barcode-value { display:block; margin-top:5px; font:11px/1.4 Consolas,monospace; letter-spacing:1.1px; color:#000; overflow-wrap:anywhere; }
+.student-member-card .library-barcode { margin-top:18px; max-width:310px; border:0; }
+.barcode-scanner { padding:24px; border:1px solid #dcdff1; border-radius:12px; background:linear-gradient(130deg,#fff,#f1f2ff); }
+.scanner-heading { display:flex; gap:16px; justify-content:space-between; align-items:center; }
+.scanner-heading>svg {color:#5b5bdf;}
+.scanner-controls {display:flex; flex-wrap:wrap; gap:12px; align-items:flex-end;}
+.scanner-code-field {flex:1;min-width:180px;}
+.scanner-actions {display:flex;flex-wrap:wrap;gap:10px;}
+.scanner-reader {max-width:580px;background:#fff;border:1px solid #dcdff1;border-radius:8px;overflow:hidden;}
+.scanner-reader video {max-width:100%;}
+.scanner-message {font-size:13px;min-height:1.5em;}
+.scanner-message[data-tone=error] {color:#a53139;}
+.scanner-message[data-tone=success] {color:#28725b;}
+.scanner-result {padding:20px;background:#fff;border:1px solid #dcdff1;border-radius:8px;}
+.scanner-result h3 {font:600 17px/1.4 system-ui,sans-serif;overflow-wrap:anywhere;}
+.scan-details {display:grid;grid-template-columns:minmax(100px,.7fr) minmax(0,1.3fr);gap:7px 16px;font-size:12px;}
+.scan-details dt {color:#677087;font-weight:500;}
+.scan-details dd {margin:0;overflow-wrap:anywhere;}
+.scan-result-actions {display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;}
+.scanner-return-form {border-top:1px solid #e3e6f1;padding-top:16px;margin-top:20px;max-width:500px;}
+.copy-label-grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;max-width:900px;}
+.copy-barcode-label {box-sizing:border-box;background:#fff;border:1px dashed #98a1b5;padding:14px;text-align:center;break-inside:avoid;}
+.label-school {font:8px/1.3 system-ui,sans-serif;letter-spacing:.4px;margin:0 0 5px;color:#29334d;}
+.copy-barcode-label h2 {font:600 12px/1.3 system-ui,sans-serif;margin:0 0 6px;overflow-wrap:anywhere;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;}
+.copy-barcode-label .library-barcode {border:0;border-radius:0;padding:5px 22px;}
+.copy-barcode-label .barcode-graphic svg {height:48px;max-width:260px;}
+.copy-barcode-label .barcode-value {font-size:10px;}
+.label-inventory {font:10px/1.4 Consolas,monospace;overflow-wrap:anywhere;margin:3px 0;}
+.label-shelf {font:9px/1.3 system-ui,sans-serif;overflow-wrap:anywhere;margin:0;}
+@media(max-width:575px) {.barcode-scanner{padding:18px;}.scanner-code-field{flex-basis:100%;}.scanner-result{padding:14px;}.scan-details{grid-template-columns:1fr;gap:3px;}.scan-details dd{margin-bottom:7px;}.copy-label-grid{grid-template-columns:1fr;}}
+@media print {
+    .copy-label-page {page:barcode-labels;}
+    .member-card-page .student-member-card {padding:14px;}
+    .member-card-page .member-card-caption {margin:12px 0 5px;}
+    .member-card-page .member-card-name {font-size:22px;margin-bottom:8px;}
+    .member-card-page .library-barcode {margin-top:10px;padding:6px 22px;max-width:75mm;}
+    .member-card-page .barcode-graphic svg {height:11mm;}
+    .member-card-page .barcode-value {font-size:8px;margin-top:3px;}
+    .member-card-page .member-card-footer {margin-top:10px;padding-top:8px;}
+    .library-barcode {print-color-adjust:exact;-webkit-print-color-adjust:exact;background:#fff !important;color:#000 !important;}
+    body:has(.copy-label-page) {background:#fff;}
+    body:has(.copy-label-page) .workspace-sidebar,body:has(.copy-label-page) .workspace-topbar,body:has(.copy-label-page) .workspace-footer,body:has(.copy-label-page) .skip-link {display:none !important;}
+    body:has(.copy-label-page) .workspace-main {margin:0;background:#fff;min-height:0;}
+    .workspace-content>.copy-label-page {padding:0 !important;}
+    .copy-label-page>.label-print-controls {display:none !important;}
+    .copy-label-grid {display:grid;grid-template-columns:90mm 90mm;gap:6mm;max-width:none;}
+    .copy-barcode-label {width:90mm;height:42mm;padding:3mm 4mm;break-inside:avoid;border:.2mm dashed #aaa;overflow:hidden;}
+    .copy-barcode-label h2 {font-size:9pt;line-height:1.2;height:8mm;margin:0;}
+    .label-school {font-size:6pt;margin-bottom:1mm;}
+    .copy-barcode-label .library-barcode {padding:1mm 5mm 0;}
+    .copy-barcode-label .barcode-graphic svg {height:12mm;max-width:64mm;}
+    .copy-barcode-label .barcode-value {font-size:7pt;line-height:1.1;margin-top:1mm;}
+    .label-inventory {font-size:6.5pt;line-height:1.2;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;margin:1mm 0;}
+    .label-shelf {font-size:6pt;line-height:1.2;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;}
+}
+@page barcode-labels {size:A4;margin:12mm;}
+.barcode-scanner [hidden] { display:none !important; }
+.scanner-reader { max-width:760px; background:#121c34; }
+.scanner-reader video { display:block; width:100%; max-height:65vh; object-fit:contain; }
+.scanner-camera-tools { display:flex; flex-wrap:wrap; align-items:center; gap:16px; }
+.scanner-camera-tools label { display:grid; gap:6px; font-size:13px; min-width:160px; }
+.scanner-camera-tools p { flex-basis:100%; }
+.scanner-camera-tools input[type=range] { width:200px; accent-color:#5b5bdf; }
+.scanner-image-preview { max-width:760px; }
+.scanner-image-preview img { display:block; max-width:100%; max-height:320px; object-fit:contain; border:1px solid #dcdff1; border-radius:8px; background:#fff; }
+.scan-code-choices { display:flex; flex-wrap:wrap; gap:8px; }
+.scan-code-choices button { max-width:100%; overflow-wrap:anywhere; white-space:normal; text-align:left; }
+.member-card-codes { display:flex; gap:12px; align-items:center; margin-top:16px; }
+.member-card-codes .library-barcode { min-width:0; flex:1; margin-top:0; }
+.member-login-qr { flex:0 0 112px; text-align:center; }
+.member-login-qr img { display:block; width:112px; height:112px; background:white; border-radius:4px; }
+.member-login-qr span { display:block; margin-top:4px; font-size:8px; color:#d2d9ef; }
+@media print {
+    .member-card-codes { margin-top:10px; }
+    .member-login-qr { flex-basis:25mm; }
+    .member-login-qr img { width:25mm; height:25mm; }
+    .member-card-codes .library-barcode { margin-top:0; padding:4px 10px; }
+}

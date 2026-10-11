@@ -18,7 +18,7 @@ class BookDetails
             ->orderBy('inventory_code')->orderBy('id')
             ->paginate(10, ['*'], 'copies_page')->withQueryString();
 
-        $canReserve = $book->copies()->whereNull('archived_at')->where('condition', 'baik')->exists();
+        $canReserve = $book->copies()->where('import_unavailable', false)->whereNull('archived_at')->where('condition', 'baik')->exists();
 
         return compact('book', 'availableCount', 'copies', 'canReserve');
     }
